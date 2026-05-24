@@ -86,6 +86,7 @@ The notebook also includes a keyword retrieval baseline. This checks whether a s
 - `npc_agent.py`: shared backend containing the `MemoryNPC` class.
 - `app.py`: Streamlit chat demo and validation trace viewer.
 - `notebook.ipynb`: report notebook with design motivation, implementation use, validation, results, error analysis, trustworthiness, and limitations.
+- `validation_lab.ipynb`: technical validation notebook that works like a small notebook app and pressure-tests intent detection, memory extraction, retrieval, trust thresholds, unsupported memory claims, and trace completeness.
 - `requirements.txt`: Python dependencies.
 - `.env.example`: example environment variable file.
 - `README.md`: setup and project explanation.
@@ -112,6 +113,8 @@ Do not commit or share your real API key. The repository includes `.env.example`
 ## Run The Notebook
 
 Open `notebook.ipynb` in Jupyter or VS Code and run the cells from top to bottom. The notebook is the main report artifact. It explains what problem is being solved, why each component was chosen, how the architecture works, how the baseline is defined, and how validation is performed.
+
+Open `validation_lab.ipynb` when you want a more technical testing notebook. It is less narrative and more focused on NLP pressure points. It includes a notebook-style `chat()` function, scripted conversations, trust-threshold response comparisons, retrieval-vs-keyword baseline tests, unsupported-memory checks, and validation-trace completeness checks.
 
 ## Run The Streamlit App
 
