@@ -55,6 +55,13 @@ class MemoryNPC:
         "ask_memory": 0,
     }
 
+    # Advice-following adds relationship behavior that is more interesting than
+    # only reacting to compliments and insults. It is still deterministic so it
+    # can be validated: following Elara's advice earns a small trust gain, while
+    # explicitly doing the opposite loses trust.
+    ADVICE_FOLLOW_DELTA = 3
+    ADVICE_IGNORE_DELTA = -8
+
     def __init__(
         self,
         chat_model: str = "gpt-4o-mini",
@@ -167,6 +174,9 @@ class MemoryNPC:
         # The event log is a validation artifact. It records the internal pipeline
         # decisions for every turn so the project can be evaluated later.
         self.event_log: List[Dict[str, Any]] = []
+        # Pending advice stores a simple recommendation from the previous turn.
+        # The next player message can then be checked for compliance or defiance.
+        self.pending_advice: Optional[Dict[str, Any]] = None
         self.last_intent = "unknown"
         self.last_retrieved_memories: List[Dict[str, Any]] = []
         self.last_saved_memory: Optional[str] = None
@@ -276,9 +286,12 @@ class MemoryNPC:
 
     def update_trust(self, intent: str, player_input: str = "") -> int:
         """Apply deterministic trust rules and clamp the score to 0-100."""
-        # `player_input` is kept in the signature for future extensions, but the
-        # current assignment version uses intent only so the score is reproducible.
+        # The score is mostly driven by intent, but it also checks whether the
+        # player followed or ignored advice from the previous turn. This gives the
+        # relationship system a memory-based behavior beyond compliments/insults.
         delta = self.TRUST_RULES.get(intent, 0)
+        advice_check = self._evaluate_advice_following(player_input)
+        delta += advice_check["advice_delta"]
         # Clamping prevents impossible relationship values such as -20 or 130.
         self.trust_score = max(0, min(100, self.trust_score + delta))
         return self.trust_score
@@ -294,6 +307,10 @@ class MemoryNPC:
         # 1. Interpret the player's message as an intent label.
         intent = self.classify_intent(player_input)
         self.last_intent = intent
+        # Before generating new advice, compare this message with the previous
+        # pending advice. Example: if Elara warned the player not to go alone and
+        # the player says "I will go alone anyway", trust should drop.
+        advice_check = self._evaluate_advice_following(player_input)
 
         # 2. Extract durable memory, if the utterance contains anything worth
         # remembering. If the model declines but the intent clearly matters for
@@ -311,7 +328,7 @@ class MemoryNPC:
                 extracted_memory,
                 memory_type=self._memory_type_from_intent(intent),
                 importance=2 if intent in {"insult", "compliment", "share_fact"} else 1,
-                trust_impact=self.TRUST_RULES.get(intent, 0),
+                trust_impact=self.TRUST_RULES.get(intent, 0) + advice_check["advice_delta"],
             )
         self.last_saved_memory = saved_memory["text"] if saved_memory else None
 
@@ -348,6 +365,10 @@ class MemoryNPC:
         # is separate from event_log because it is dialogue, not validation data.
         self.conversation_history.append({"speaker": "Player", "text": player_input})
         self.conversation_history.append({"speaker": "Elara", "text": response})
+        # Register advice after the response so the next player message can be
+        # checked against it. This keeps cause and effect easy to explain.
+        new_advice = self._create_pending_advice(intent, player_input)
+        self.pending_advice = new_advice
 
         # The turn record is the most important validation artifact. It stores the
         # internal pipeline decisions that explain the final response.
@@ -362,6 +383,10 @@ class MemoryNPC:
             "trust_score": trust_score,
             "trust_level": self.get_trust_level(),
             "trust_delta": trust_score - trust_before,
+            "advice_status": advice_check["advice_status"],
+            "advice_delta": advice_check["advice_delta"],
+            "active_advice": advice_check["active_advice"],
+            "new_advice": new_advice["summary"] if new_advice else "None",
             "npc_response": response,
         }
         self.event_log.append(turn_record)
@@ -406,11 +431,113 @@ class MemoryNPC:
             "trust_score",
             "trust_level",
             "trust_delta",
+            "advice_status",
+            "advice_delta",
+            "active_advice",
+            "new_advice",
             "npc_response",
         ]
         if not self.event_log:
             return pd.DataFrame(columns=columns)
         return pd.DataFrame(self.event_log, columns=columns)
+
+    def _evaluate_advice_following(self, player_input: str) -> Dict[str, Any]:
+        """Check whether the player followed or ignored Elara's pending advice.
+
+        This is deliberately rule-based. It would be possible to ask an LLM whether
+        the player complied, but a deterministic rule is easier to validate and
+        explain in the assignment report.
+        """
+        if not self.pending_advice:
+            return {
+                "advice_status": "none",
+                "advice_delta": 0,
+                "active_advice": "None",
+            }
+
+        text = player_input.lower()
+        active_advice = self.pending_advice["summary"]
+
+        # Positive markers are checked first so "I will not go alone" counts as
+        # following advice even though it contains the phrase "go alone".
+        follow_markers = [
+            "i will do that",
+            "i'll do that",
+            "follow your advice",
+            "take your advice",
+            "bring a torch",
+            "bring light",
+            "not go alone",
+            "be careful",
+            "ask around",
+            "prepare first",
+            "repair it first",
+        ]
+        if any(marker in text for marker in follow_markers):
+            return {
+                "advice_status": "followed_advice",
+                "advice_delta": self.ADVICE_FOLLOW_DELTA,
+                "active_advice": active_advice,
+            }
+
+        # These markers represent explicitly doing the opposite of cautious
+        # advice. The penalty is smaller than repeated insults but large enough to
+        # make behavior matter.
+        ignore_markers = [
+            "ignore",
+            "opposite",
+            "anyway",
+            "reckless",
+            "go alone",
+            "without help",
+            "without a torch",
+            "without light",
+            "won't",
+            "will not",
+            "not going to",
+            "don't care",
+            "no need",
+        ]
+        if any(marker in text for marker in ignore_markers):
+            return {
+                "advice_status": "ignored_advice",
+                "advice_delta": self.ADVICE_IGNORE_DELTA,
+                "active_advice": active_advice,
+            }
+
+        return {
+            "advice_status": "unrelated",
+            "advice_delta": 0,
+            "active_advice": active_advice,
+        }
+
+    def _create_pending_advice(self, intent: str, player_input: str) -> Optional[Dict[str, Any]]:
+        """Create advice state for the next turn when Elara is likely advising.
+
+        The app does not parse the LLM's exact response. Instead it records advice
+        when the player asks for help or a quest, because those are the turns where
+        Elara is expected to give practical guidance.
+        """
+        text = player_input.lower()
+        if intent not in {"ask_help", "ask_quest"}:
+            return None
+
+        if any(word in text for word in ["forest", "sword", "lost", "recover"]):
+            return {
+                "topic": "lost_item_recovery",
+                "summary": "Recover the lost item carefully; bring light, ask around, and do not go alone.",
+            }
+
+        if intent == "ask_quest":
+            return {
+                "topic": "quest_preparation",
+                "summary": "Prepare first, ask around, and avoid rushing into danger.",
+            }
+
+        return {
+            "topic": "general_help",
+            "summary": "Follow Elara's practical advice and avoid reckless shortcuts.",
+        }
 
     def _rule_based_intent(self, player_input: str) -> str:
         """Fast fallback intent classifier for common, easy-to-test phrases."""

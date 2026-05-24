@@ -62,6 +62,8 @@ Trust bands:
 
 The trust band is included in the response prompt. Low trust tells Elara to be more guarded and brief, neutral trust keeps her practical, and high trust makes her warmer and more helpful. The stored memory metadata also includes `trust_impact`, so relationship events can be inspected later.
 
+Trust is not only changed by compliments and insults. Elara can also create a pending advice state after help or quest turns. On the next turn, if the player follows the advice, trust increases by `+3`. If the player explicitly does the opposite, such as saying they will ignore the advice or go alone anyway, trust decreases by `-8`. This makes trust depend on conversational behavior, not only sentiment.
+
 ## Validation Plan
 
 The project validates the pipeline instead of only judging whether the final answer sounds nice.
@@ -70,8 +72,9 @@ The project validates the pipeline instead of only judging whether the final ans
 - Memory retrieval evaluation: at least 10 manually designed retrieval tests where the correct memory should appear in the top 3.
 - Baseline comparison: a keyword-overlap retrieval baseline is compared with FAISS semantic retrieval.
 - Trust validation: compliments and insults are checked against deterministic score changes and plotted.
+- Advice-following validation: the validation lab checks whether following advice increases trust and ignoring advice decreases trust.
 - Response quality checklist: manually checks relevant memory use, unsupported claims, trust tone, and character consistency.
-- Streamlit validation trace: the app stores every turn with input, intent, extracted memory, saved memory, retrieved memories, trust before/after, trust delta, trust level, and response. The trace can be downloaded as CSV.
+- Streamlit validation trace: the app stores every turn with input, intent, extracted memory, saved memory, retrieved memories, trust before/after, trust delta, trust level, advice status, advice delta, and response. The trace can be downloaded as CSV.
 
 The target is at least `80%` memory retrieval success on the manual retrieval test cases.
 
@@ -136,6 +139,9 @@ Do you remember what I lost?
 You are a very skilled blacksmith
 You are useless
 Can you still help me?
+Can you help me recover my sword?
+I will go alone anyway
+I will follow your advice and bring a torch
 ```
 
 The validation trace should show the detected intent, saved memories, retrieved memories, trust changes, and Elara's response for each turn.

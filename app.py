@@ -100,6 +100,13 @@ def render_sidebar() -> None:
                 # The event log is the app-side version of the notebook validation
                 # tables. It records intermediate NLP outputs for every turn.
                 st.dataframe(event_log, width="stretch", hide_index=True)
+                for event in agent.event_log:
+                    st.caption(
+                        f"Turn {event['turn']}: intent={event['intent']} | "
+                        f"trust_delta={event['trust_delta']} | "
+                        f"advice_status={event['advice_status']} | "
+                        f"advice_delta={event['advice_delta']}"
+                    )
                 st.download_button(
                     "Download trace CSV",
                     event_log.to_csv(index=False),
@@ -168,6 +175,9 @@ if player_input:
                             "trust_score": result["trust_score"],
                             "trust_level": result["trust_level"],
                             "trust_delta": result["trust_delta"],
+                            "advice_status": result["advice_status"],
+                            "advice_delta": result["advice_delta"],
+                            "new_advice": result["new_advice"],
                         }
                     ]
                 )
