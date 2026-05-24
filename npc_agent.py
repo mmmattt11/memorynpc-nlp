@@ -12,6 +12,7 @@ why it was implemented this way.
 """
 
 import os
+import re
 from typing import Any, Dict, List, Optional
 
 import pandas as pd
@@ -189,6 +190,8 @@ class MemoryNPC:
         rule_intent = self._rule_based_intent(player_input)
         if rule_intent != "unknown":
             return rule_intent
+        if self._is_obvious_filler(player_input):
+            return "unknown"
 
         try:
             # The LLM fallback handles language that is not covered by the simple
@@ -496,6 +499,7 @@ class MemoryNPC:
             "will not",
             "not going to",
             "don't care",
+            "do not care",
             "no need",
         ]
         if any(marker in text for marker in ignore_markers):
@@ -544,23 +548,58 @@ class MemoryNPC:
         text = player_input.lower().strip()
         # Order matters: memory questions should be caught before broad fact
         # sharing, and insults/compliments should be caught before unknown.
-        if any(word in text for word in ["hello", "hi", "greetings", "good morning", "good evening"]):
+        if self._contains_any(text, ["hello", "hi", "greetings", "good morning", "good evening"]):
             return "greeting"
-        if any(word in text for word in ["goodbye", "bye", "farewell", "see you"]):
+        if self._contains_any(text, ["goodbye", "bye", "farewell", "see you"]):
             return "goodbye"
-        if any(word in text for word in ["remember", "recall", "what did i", "do you know what i"]):
+        if self._contains_any(text, ["remember", "recall", "what did i", "do you know what i"]):
             return "ask_memory"
-        if any(word in text for word in ["quest", "mission", "job", "task for me"]):
+        if self._contains_any(text, ["quest", "mission", "job", "task for me"]):
             return "ask_quest"
-        if any(word in text for word in ["help", "assist", "can you fix", "can you make", "can you forge"]):
+        if self._contains_any(text, ["help", "assist", "can you fix", "can you make", "can you forge"]):
             return "ask_help"
-        if any(word in text for word in ["skilled", "thank", "thanks", "great", "excellent", "impressive", "kind"]):
+        if self._contains_any(text, ["skilled", "thank", "thanks", "great", "excellent", "impressive", "kind"]):
             return "compliment"
-        if any(word in text for word in ["useless", "stupid", "awful", "terrible", "hate", "worthless"]):
+        if self._contains_any(text, ["useless", "stupid", "awful", "terrible", "hate", "worthless"]):
             return "insult"
         if any(phrase in text for phrase in ["my name is", "i am ", "i'm ", "i lost", "i found", "i like", "i need", "i want"]):
             return "share_fact"
         return "unknown"
+
+    def _contains_any(self, text: str, terms: List[str]) -> bool:
+        """Return True when text contains a term as a phrase or whole word.
+
+        This avoids false positives from substring matching. For example, the old
+        version could treat "shield" as a greeting because it contains "hi".
+        """
+        for term in terms:
+            if " " in term:
+                if term in text:
+                    return True
+            elif re.search(rf"\b{re.escape(term)}\b", text):
+                return True
+        return False
+
+    def _is_obvious_filler(self, player_input: str) -> bool:
+        """Catch low-value small talk that should remain unknown.
+
+        This prevents the LLM fallback from over-interpreting sentences such as
+        "the sky is cloudy" as meaningful player facts. The rule is intentionally
+        narrow so it does not block real game memories like lost items or goals.
+        """
+        text = player_input.lower()
+        filler_terms = [
+            "sky",
+            "cloud",
+            "clouds",
+            "cloudy",
+            "moon",
+            "weather",
+            "rain",
+            "sunny",
+            "noisy today",
+        ]
+        return self._contains_any(text, filler_terms)
 
     def _rule_based_memory(self, player_input: str) -> str:
         """Small fallback extractor for durable facts used in tests and demos."""

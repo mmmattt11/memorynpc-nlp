@@ -90,6 +90,7 @@ The notebook also includes a keyword retrieval baseline. This checks whether a s
 - `app.py`: Streamlit chat demo and validation trace viewer.
 - `notebook.ipynb`: report notebook with design motivation, implementation use, validation, results, error analysis, trustworthiness, and limitations.
 - `validation_lab.ipynb`: technical validation notebook that works like a small notebook app and pressure-tests intent detection, memory extraction, retrieval, trust thresholds, unsupported memory claims, and trace completeness.
+- `VALIDATION_RESULTS.md`: concise summary of the executed notebook results and long-conversation validation outcomes.
 - `requirements.txt`: Python dependencies.
 - `.env.example`: example environment variable file.
 - `README.md`: setup and project explanation.
