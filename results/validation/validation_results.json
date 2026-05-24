@@ -1,0 +1,2044 @@
+{
+  "summary": [
+    {
+      "metric": "Intent classification",
+      "cases": 30,
+      "success_rate": 1.0,
+      "target": ">= 80%",
+      "success_rate_percent": "100%"
+    },
+    {
+      "metric": "Memory extraction selectivity",
+      "cases": 22,
+      "success_rate": 1.0,
+      "target": ">= 80%",
+      "success_rate_percent": "100%"
+    },
+    {
+      "metric": "FAISS semantic retrieval",
+      "cases": 25,
+      "success_rate": 1.0,
+      "target": ">= 80%",
+      "success_rate_percent": "100%"
+    },
+    {
+      "metric": "Keyword retrieval baseline",
+      "cases": 25,
+      "success_rate": 0.88,
+      "target": "comparison baseline",
+      "success_rate_percent": "88%"
+    },
+    {
+      "metric": "Trust rule validation",
+      "cases": 22,
+      "success_rate": 1.0,
+      "target": "100% deterministic",
+      "success_rate_percent": "100%"
+    },
+    {
+      "metric": "Advice behavior validation",
+      "cases": 22,
+      "success_rate": 1.0,
+      "target": "100% deterministic",
+      "success_rate_percent": "100%"
+    },
+    {
+      "metric": "Persistence roundtrip",
+      "cases": 20,
+      "success_rate": 1.0,
+      "target": "100% deterministic",
+      "success_rate_percent": "100%"
+    },
+    {
+      "metric": "Full-pipeline trace completeness",
+      "cases": 20,
+      "success_rate": 1.0,
+      "target": "100%",
+      "success_rate_percent": "100%"
+    },
+    {
+      "metric": "Full-pipeline trust arithmetic",
+      "cases": 20,
+      "success_rate": 1.0,
+      "target": "100%",
+      "success_rate_percent": "100%"
+    },
+    {
+      "metric": "Full-pipeline automatic response checks",
+      "cases": 20,
+      "success_rate": 1.0,
+      "target": ">= 80%",
+      "success_rate_percent": "100%"
+    }
+  ],
+  "tables": {
+    "intent": [
+      {
+        "input": "Hello Elara",
+        "expected": "greeting",
+        "predicted": "greeting",
+        "correct": true
+      },
+      {
+        "input": "Hi there blacksmith",
+        "expected": "greeting",
+        "predicted": "greeting",
+        "correct": true
+      },
+      {
+        "input": "Good morning",
+        "expected": "greeting",
+        "predicted": "greeting",
+        "correct": true
+      },
+      {
+        "input": "Greetings from the north road",
+        "expected": "greeting",
+        "predicted": "greeting",
+        "correct": true
+      },
+      {
+        "input": "Goodbye for now",
+        "expected": "goodbye",
+        "predicted": "goodbye",
+        "correct": true
+      },
+      {
+        "input": "Farewell Elara",
+        "expected": "goodbye",
+        "predicted": "goodbye",
+        "correct": true
+      },
+      {
+        "input": "See you later",
+        "expected": "goodbye",
+        "predicted": "goodbye",
+        "correct": true
+      },
+      {
+        "input": "Can you give me a quest?",
+        "expected": "ask_quest",
+        "predicted": "ask_quest",
+        "correct": true
+      },
+      {
+        "input": "Do you have a mission for me?",
+        "expected": "ask_quest",
+        "predicted": "ask_quest",
+        "correct": true
+      },
+      {
+        "input": "Any job for me today?",
+        "expected": "ask_quest",
+        "predicted": "ask_quest",
+        "correct": true
+      },
+      {
+        "input": "My name is Matt",
+        "expected": "share_fact",
+        "predicted": "share_fact",
+        "correct": true
+      },
+      {
+        "input": "I lost a silver dagger",
+        "expected": "share_fact",
+        "predicted": "share_fact",
+        "correct": true
+      },
+      {
+        "input": "I want to find my brother",
+        "expected": "share_fact",
+        "predicted": "share_fact",
+        "correct": true
+      },
+      {
+        "input": "I like heavy axes",
+        "expected": "share_fact",
+        "predicted": "share_fact",
+        "correct": true
+      },
+      {
+        "input": "Do you remember my name?",
+        "expected": "ask_memory",
+        "predicted": "ask_memory",
+        "correct": true
+      },
+      {
+        "input": "What did I lose earlier?",
+        "expected": "ask_memory",
+        "predicted": "ask_memory",
+        "correct": true
+      },
+      {
+        "input": "Can you recall what I told you?",
+        "expected": "ask_memory",
+        "predicted": "ask_memory",
+        "correct": true
+      },
+      {
+        "input": "You are a skilled blacksmith",
+        "expected": "compliment",
+        "predicted": "compliment",
+        "correct": true
+      },
+      {
+        "input": "Thanks, that was great",
+        "expected": "compliment",
+        "predicted": "compliment",
+        "correct": true
+      },
+      {
+        "input": "That repair was excellent",
+        "expected": "compliment",
+        "predicted": "compliment",
+        "correct": true
+      },
+      {
+        "input": "You are useless",
+        "expected": "insult",
+        "predicted": "insult",
+        "correct": true
+      },
+      {
+        "input": "That was a terrible repair",
+        "expected": "insult",
+        "predicted": "insult",
+        "correct": true
+      },
+      {
+        "input": "I hate your work",
+        "expected": "insult",
+        "predicted": "insult",
+        "correct": true
+      },
+      {
+        "input": "Can you help me fix my shield?",
+        "expected": "ask_help",
+        "predicted": "ask_help",
+        "correct": true
+      },
+      {
+        "input": "Please assist me with this blade",
+        "expected": "ask_help",
+        "predicted": "ask_help",
+        "correct": true
+      },
+      {
+        "input": "Can you forge a hinge?",
+        "expected": "ask_help",
+        "predicted": "ask_help",
+        "correct": true
+      },
+      {
+        "input": "The sky is cloudy",
+        "expected": "unknown",
+        "predicted": "unknown",
+        "correct": true
+      },
+      {
+        "input": "Maybe the moon is made of iron",
+        "expected": "unknown",
+        "predicted": "unknown",
+        "correct": true
+      },
+      {
+        "input": "The rain sounds loud",
+        "expected": "unknown",
+        "predicted": "unknown",
+        "correct": true
+      },
+      {
+        "input": "Clouds pass over the village",
+        "expected": "unknown",
+        "predicted": "unknown",
+        "correct": true
+      }
+    ],
+    "memory_extraction": [
+      {
+        "input": "My name is Matt",
+        "expected_saved": true,
+        "extracted_memory": "Elara remembers that the player's name is Matt.",
+        "actual_saved": true,
+        "correct": true
+      },
+      {
+        "input": "My name is Lena",
+        "expected_saved": true,
+        "extracted_memory": "Elara remembers that the player's name is Lena.",
+        "actual_saved": true,
+        "correct": true
+      },
+      {
+        "input": "I lost a sword near the forest",
+        "expected_saved": true,
+        "extracted_memory": "The player lost a sword near the forest.",
+        "actual_saved": true,
+        "correct": true
+      },
+      {
+        "input": "I lost a copper ring at the bridge",
+        "expected_saved": true,
+        "extracted_memory": "The player lost a copper ring at the bridge.",
+        "actual_saved": true,
+        "correct": true
+      },
+      {
+        "input": "I want to find my brother",
+        "expected_saved": true,
+        "extracted_memory": "The player is searching for their brother.",
+        "actual_saved": true,
+        "correct": true
+      },
+      {
+        "input": "I need my shield repaired before sunset",
+        "expected_saved": true,
+        "extracted_memory": "The player needs their shield repaired before sunset.",
+        "actual_saved": true,
+        "correct": true
+      },
+      {
+        "input": "I like heavy axes",
+        "expected_saved": true,
+        "extracted_memory": "The player prefers heavy axes.",
+        "actual_saved": true,
+        "correct": true
+      },
+      {
+        "input": "I found a strange map",
+        "expected_saved": true,
+        "extracted_memory": "Elara remembers that the player found a strange map.",
+        "actual_saved": true,
+        "correct": true
+      },
+      {
+        "input": "You are a skilled blacksmith",
+        "expected_saved": true,
+        "extracted_memory": "The player praised Elara: You are a skilled blacksmith.",
+        "actual_saved": true,
+        "correct": true
+      },
+      {
+        "input": "You are useless",
+        "expected_saved": true,
+        "extracted_memory": "The player insulted Elara: You are useless.",
+        "actual_saved": true,
+        "correct": true
+      },
+      {
+        "input": "I promised to help the miller",
+        "expected_saved": true,
+        "extracted_memory": "Elara remembers that the player promised to help the miller.",
+        "actual_saved": true,
+        "correct": true
+      },
+      {
+        "input": "I am afraid of cave spiders",
+        "expected_saved": true,
+        "extracted_memory": "Elara remembers that the player is afraid of cave spiders.",
+        "actual_saved": true,
+        "correct": true
+      },
+      {
+        "input": "I need a quiet road north",
+        "expected_saved": true,
+        "extracted_memory": "The player has a goal or need: I need a quiet road north.",
+        "actual_saved": true,
+        "correct": true
+      },
+      {
+        "input": "I want a dagger made of silver",
+        "expected_saved": true,
+        "extracted_memory": "The player desires a dagger made of silver.",
+        "actual_saved": true,
+        "correct": true
+      },
+      {
+        "input": "I found an old key in the chapel",
+        "expected_saved": true,
+        "extracted_memory": "The player found an old key in the chapel.",
+        "actual_saved": true,
+        "correct": true
+      },
+      {
+        "input": "I helped the baker yesterday",
+        "expected_saved": true,
+        "extracted_memory": "The player helped the baker yesterday.",
+        "actual_saved": true,
+        "correct": true
+      },
+      {
+        "input": "Hello there",
+        "expected_saved": false,
+        "extracted_memory": "NONE",
+        "actual_saved": false,
+        "correct": true
+      },
+      {
+        "input": "Goodbye",
+        "expected_saved": false,
+        "extracted_memory": "NONE",
+        "actual_saved": false,
+        "correct": true
+      },
+      {
+        "input": "The weather is gray today",
+        "expected_saved": false,
+        "extracted_memory": "NONE",
+        "actual_saved": false,
+        "correct": true
+      },
+      {
+        "input": "The moon looks bright",
+        "expected_saved": false,
+        "extracted_memory": "NONE",
+        "actual_saved": false,
+        "correct": true
+      },
+      {
+        "input": "Clouds are moving slowly",
+        "expected_saved": false,
+        "extracted_memory": "NONE",
+        "actual_saved": false,
+        "correct": true
+      },
+      {
+        "input": "It is noisy today",
+        "expected_saved": false,
+        "extracted_memory": "NONE",
+        "actual_saved": false,
+        "correct": true
+      }
+    ],
+    "faiss_retrieval": [
+      {
+        "query": "What is my name?",
+        "expected_keyword": "Matt",
+        "top_3_memories": [
+          "The player's name is Matt.",
+          "The player is searching for their missing sister.",
+          "The player wants to find their missing brother."
+        ],
+        "success": true
+      },
+      {
+        "query": "Which weapon did I misplace near the trees?",
+        "expected_keyword": "sword",
+        "top_3_memories": [
+          "The player lost a sword near the forest.",
+          "The player lost a brown horse near the river.",
+          "The player lost a copper ring at the old bridge."
+        ],
+        "success": true
+      },
+      {
+        "query": "Who did I help with a broken wheel?",
+        "expected_keyword": "miller",
+        "top_3_memories": [
+          "The player helped the village miller repair a broken wheel.",
+          "The player promised to help the baker carry flour.",
+          "The player needs a broken stable hinge forged."
+        ],
+        "success": true
+      },
+      {
+        "query": "What kind of weapon do I prefer?",
+        "expected_keyword": "axes",
+        "top_3_memories": [
+          "The player prefers heavy axes over light daggers.",
+          "The player wants a silver dagger for night patrol.",
+          "The player praised Elara as a skilled blacksmith."
+        ],
+        "success": true
+      },
+      {
+        "query": "Who am I searching for in my family?",
+        "expected_keyword": "brother",
+        "top_3_memories": [
+          "The player is searching for their missing sister.",
+          "The player wants to find their missing brother.",
+          "The player found an old map under the chapel floor."
+        ],
+        "success": true
+      },
+      {
+        "query": "Did I offend Elara before?",
+        "expected_keyword": "useless",
+        "top_3_memories": [
+          "The player insulted Elara and called her useless.",
+          "The player praised Elara as a skilled blacksmith.",
+          "Elara advised the player to bring a torch into the forest."
+        ],
+        "success": true
+      },
+      {
+        "query": "Did I compliment the blacksmith?",
+        "expected_keyword": "skilled",
+        "top_3_memories": [
+          "The player praised Elara as a skilled blacksmith.",
+          "The player helped the village miller repair a broken wheel.",
+          "The player owes a merchant three silver coins."
+        ],
+        "success": true
+      },
+      {
+        "query": "What did I lose at the bridge?",
+        "expected_keyword": "ring",
+        "top_3_memories": [
+          "The player lost a copper ring at the old bridge.",
+          "The player lost a sword near the forest.",
+          "The player lost a brown horse near the river."
+        ],
+        "success": true
+      },
+      {
+        "query": "What equipment needs repair before sunset?",
+        "expected_keyword": "shield",
+        "top_3_memories": [
+          "The player needs a shield repaired before sunset.",
+          "The player needs a broken stable hinge forged.",
+          "The player wants a silver dagger for night patrol."
+        ],
+        "success": true
+      },
+      {
+        "query": "What creature scares me in caves?",
+        "expected_keyword": "spiders",
+        "top_3_memories": [
+          "The player is afraid of giant cave spiders.",
+          "The player is afraid of wolves near the ridge.",
+          "Elara advised the player to bring a torch into the forest."
+        ],
+        "success": true
+      },
+      {
+        "query": "What did I discover below the chapel?",
+        "expected_keyword": "map",
+        "top_3_memories": [
+          "The player found an old map under the chapel floor.",
+          "The player found an old iron key in the chapel.",
+          "The player knows a hidden path behind the forest shrine."
+        ],
+        "success": true
+      },
+      {
+        "query": "Who did I promise to help with flour?",
+        "expected_keyword": "baker",
+        "top_3_memories": [
+          "The player promised to help the baker carry flour.",
+          "The player helped the village miller repair a broken wheel.",
+          "The player owes a merchant three silver coins."
+        ],
+        "success": true
+      },
+      {
+        "query": "What blade do I want for patrol?",
+        "expected_keyword": "dagger",
+        "top_3_memories": [
+          "The player wants a silver dagger for night patrol.",
+          "The player prefers heavy axes over light daggers.",
+          "The player needs a shield repaired before sunset."
+        ],
+        "success": true
+      },
+      {
+        "query": "What type of roads do I prefer?",
+        "expected_keyword": "roads",
+        "top_3_memories": [
+          "The player prefers quiet roads over crowded markets.",
+          "The player prefers heavy axes over light daggers.",
+          "The player wants a silver dagger for night patrol."
+        ],
+        "success": true
+      },
+      {
+        "query": "Which gate do I plan to use?",
+        "expected_keyword": "north",
+        "top_3_memories": [
+          "The player plans to leave through the north gate.",
+          "The player prefers quiet roads over crowded markets.",
+          "The player knows a hidden path behind the forest shrine."
+        ],
+        "success": true
+      },
+      {
+        "query": "What stable part needs forging?",
+        "expected_keyword": "hinge",
+        "top_3_memories": [
+          "The player needs a broken stable hinge forged.",
+          "The player helped the village miller repair a broken wheel.",
+          "The player's axe head cracked during training."
+        ],
+        "success": true
+      },
+      {
+        "query": "What animal did I lose by the river?",
+        "expected_keyword": "horse",
+        "top_3_memories": [
+          "The player lost a brown horse near the river.",
+          "The player lost a sword near the forest.",
+          "The player lost a copper ring at the old bridge."
+        ],
+        "success": true
+      },
+      {
+        "query": "What color is my torn cloak?",
+        "expected_keyword": "cloak",
+        "top_3_memories": [
+          "The player wears a blue cloak with torn sleeves.",
+          "The player lost a sword near the forest.",
+          "The player lost a brown horse near the river."
+        ],
+        "success": true
+      },
+      {
+        "query": "What did I find in the chapel?",
+        "expected_keyword": "key",
+        "top_3_memories": [
+          "The player found an old map under the chapel floor.",
+          "The player found an old iron key in the chapel.",
+          "The player knows a hidden path behind the forest shrine."
+        ],
+        "success": true
+      },
+      {
+        "query": "What did Elara tell me to bring into the woods?",
+        "expected_keyword": "torch",
+        "top_3_memories": [
+          "Elara advised the player to bring a torch into the forest.",
+          "The player praised Elara as a skilled blacksmith.",
+          "The player insulted Elara and called her useless."
+        ],
+        "success": true
+      },
+      {
+        "query": "What animals near the ridge frighten me?",
+        "expected_keyword": "wolves",
+        "top_3_memories": [
+          "The player is afraid of wolves near the ridge.",
+          "The player is afraid of giant cave spiders.",
+          "The player lost a brown horse near the river."
+        ],
+        "success": true
+      },
+      {
+        "query": "Who do I owe silver coins to?",
+        "expected_keyword": "merchant",
+        "top_3_memories": [
+          "The player owes a merchant three silver coins.",
+          "The player wants a silver dagger for night patrol.",
+          "The player lost a copper ring at the old bridge."
+        ],
+        "success": true
+      },
+      {
+        "query": "What tool cracked during training?",
+        "expected_keyword": "axe",
+        "top_3_memories": [
+          "The player's axe head cracked during training.",
+          "The player needs a broken stable hinge forged.",
+          "The player lost a sword near the forest."
+        ],
+        "success": true
+      },
+      {
+        "query": "Which sibling am I looking for besides my brother?",
+        "expected_keyword": "sister",
+        "top_3_memories": [
+          "The player wants to find their missing brother.",
+          "The player is searching for their missing sister.",
+          "The player's name is Matt."
+        ],
+        "success": true
+      },
+      {
+        "query": "What route do I know behind the shrine?",
+        "expected_keyword": "path",
+        "top_3_memories": [
+          "The player knows a hidden path behind the forest shrine.",
+          "The player found an old map under the chapel floor.",
+          "The player plans to leave through the north gate."
+        ],
+        "success": true
+      }
+    ],
+    "keyword_baseline": [
+      {
+        "query": "What is my name?",
+        "expected_keyword": "Matt",
+        "keyword_top_3": [
+          "The player's name is Matt.",
+          "The player is afraid of giant cave spiders.",
+          "The player is afraid of wolves near the ridge."
+        ],
+        "success": true
+      },
+      {
+        "query": "Which weapon did I misplace near the trees?",
+        "expected_keyword": "sword",
+        "keyword_top_3": [
+          "The player lost a sword near the forest.",
+          "The player lost a brown horse near the river.",
+          "The player is afraid of wolves near the ridge."
+        ],
+        "success": true
+      },
+      {
+        "query": "Who did I help with a broken wheel?",
+        "expected_keyword": "miller",
+        "keyword_top_3": [
+          "The player helped the village miller repair a broken wheel.",
+          "The player needs a broken stable hinge forged.",
+          "The player wears a blue cloak with torn sleeves."
+        ],
+        "success": true
+      },
+      {
+        "query": "What kind of weapon do I prefer?",
+        "expected_keyword": "axes",
+        "keyword_top_3": [
+          "The player is afraid of giant cave spiders.",
+          "The player is afraid of wolves near the ridge."
+        ],
+        "success": false
+      },
+      {
+        "query": "Who am I searching for in my family?",
+        "expected_keyword": "brother",
+        "keyword_top_3": [
+          "The player is searching for their missing sister.",
+          "The player wants a silver dagger for night patrol.",
+          "The player found an old iron key in the chapel."
+        ],
+        "success": false
+      },
+      {
+        "query": "Did I offend Elara before?",
+        "expected_keyword": "useless",
+        "keyword_top_3": [
+          "The player insulted Elara and called her useless.",
+          "The player praised Elara as a skilled blacksmith.",
+          "The player needs a shield repaired before sunset."
+        ],
+        "success": true
+      },
+      {
+        "query": "Did I compliment the blacksmith?",
+        "expected_keyword": "skilled",
+        "keyword_top_3": [
+          "The player praised Elara as a skilled blacksmith.",
+          "The player's name is Matt.",
+          "The player lost a sword near the forest."
+        ],
+        "success": true
+      },
+      {
+        "query": "What did I lose at the bridge?",
+        "expected_keyword": "ring",
+        "keyword_top_3": [
+          "The player lost a copper ring at the old bridge.",
+          "The player's name is Matt.",
+          "The player lost a sword near the forest."
+        ],
+        "success": true
+      },
+      {
+        "query": "What equipment needs repair before sunset?",
+        "expected_keyword": "shield",
+        "keyword_top_3": [
+          "The player needs a shield repaired before sunset.",
+          "The player helped the village miller repair a broken wheel.",
+          "The player needs a broken stable hinge forged."
+        ],
+        "success": true
+      },
+      {
+        "query": "What creature scares me in caves?",
+        "expected_keyword": "spiders",
+        "keyword_top_3": [
+          "The player found an old iron key in the chapel."
+        ],
+        "success": false
+      },
+      {
+        "query": "What did I discover below the chapel?",
+        "expected_keyword": "map",
+        "keyword_top_3": [
+          "The player found an old map under the chapel floor.",
+          "The player found an old iron key in the chapel.",
+          "The player's name is Matt."
+        ],
+        "success": true
+      },
+      {
+        "query": "Who did I promise to help with flour?",
+        "expected_keyword": "baker",
+        "keyword_top_3": [
+          "The player promised to help the baker carry flour.",
+          "The player wants to find their missing brother.",
+          "The player plans to leave through the north gate."
+        ],
+        "success": true
+      },
+      {
+        "query": "What blade do I want for patrol?",
+        "expected_keyword": "dagger",
+        "keyword_top_3": [
+          "The player wants a silver dagger for night patrol.",
+          "The player is searching for their missing sister."
+        ],
+        "success": true
+      },
+      {
+        "query": "What type of roads do I prefer?",
+        "expected_keyword": "roads",
+        "keyword_top_3": [
+          "The player is afraid of giant cave spiders.",
+          "The player prefers quiet roads over crowded markets.",
+          "The player is afraid of wolves near the ridge."
+        ],
+        "success": true
+      },
+      {
+        "query": "Which gate do I plan to use?",
+        "expected_keyword": "north",
+        "keyword_top_3": [
+          "The player plans to leave through the north gate.",
+          "The player wants to find their missing brother.",
+          "The player promised to help the baker carry flour."
+        ],
+        "success": true
+      },
+      {
+        "query": "What stable part needs forging?",
+        "expected_keyword": "hinge",
+        "keyword_top_3": [
+          "The player needs a broken stable hinge forged.",
+          "The player needs a shield repaired before sunset."
+        ],
+        "success": true
+      },
+      {
+        "query": "What animal did I lose by the river?",
+        "expected_keyword": "horse",
+        "keyword_top_3": [
+          "The player lost a brown horse near the river.",
+          "The player's name is Matt.",
+          "The player lost a sword near the forest."
+        ],
+        "success": true
+      },
+      {
+        "query": "What color is my torn cloak?",
+        "expected_keyword": "cloak",
+        "keyword_top_3": [
+          "The player wears a blue cloak with torn sleeves.",
+          "The player's name is Matt.",
+          "The player is afraid of giant cave spiders."
+        ],
+        "success": true
+      },
+      {
+        "query": "What did I find in the chapel?",
+        "expected_keyword": "key",
+        "keyword_top_3": [
+          "The player found an old iron key in the chapel.",
+          "The player wants to find their missing brother.",
+          "The player found an old map under the chapel floor."
+        ],
+        "success": true
+      },
+      {
+        "query": "What did Elara tell me to bring into the woods?",
+        "expected_keyword": "torch",
+        "keyword_top_3": [
+          "Elara advised the player to bring a torch into the forest.",
+          "The player wants to find their missing brother.",
+          "The player insulted Elara and called her useless."
+        ],
+        "success": true
+      },
+      {
+        "query": "What animals near the ridge frighten me?",
+        "expected_keyword": "wolves",
+        "keyword_top_3": [
+          "The player is afraid of wolves near the ridge.",
+          "The player lost a sword near the forest.",
+          "The player lost a brown horse near the river."
+        ],
+        "success": true
+      },
+      {
+        "query": "Who do I owe silver coins to?",
+        "expected_keyword": "merchant",
+        "keyword_top_3": [
+          "The player owes a merchant three silver coins.",
+          "The player wants to find their missing brother.",
+          "The player promised to help the baker carry flour."
+        ],
+        "success": true
+      },
+      {
+        "query": "What tool cracked during training?",
+        "expected_keyword": "axe",
+        "keyword_top_3": [
+          "The player's axe head cracked during training."
+        ],
+        "success": true
+      },
+      {
+        "query": "Which sibling am I looking for besides my brother?",
+        "expected_keyword": "sister",
+        "keyword_top_3": [
+          "The player wants to find their missing brother.",
+          "The player wants a silver dagger for night patrol.",
+          "The player is searching for their missing sister."
+        ],
+        "success": true
+      },
+      {
+        "query": "What route do I know behind the shrine?",
+        "expected_keyword": "path",
+        "keyword_top_3": [
+          "The player knows a hidden path behind the forest shrine.",
+          "The player's name is Matt.",
+          "The player lost a sword near the forest."
+        ],
+        "success": true
+      }
+    ],
+    "trust_rules": [
+      {
+        "intent": "greeting",
+        "expected_before": 50,
+        "actual_before": 50,
+        "expected_after": 51,
+        "actual_after": 51,
+        "correct": true
+      },
+      {
+        "intent": "share_fact",
+        "expected_before": 51,
+        "actual_before": 51,
+        "expected_after": 52,
+        "actual_after": 52,
+        "correct": true
+      },
+      {
+        "intent": "compliment",
+        "expected_before": 52,
+        "actual_before": 52,
+        "expected_after": 57,
+        "actual_after": 57,
+        "correct": true
+      },
+      {
+        "intent": "insult",
+        "expected_before": 57,
+        "actual_before": 57,
+        "expected_after": 47,
+        "actual_after": 47,
+        "correct": true
+      },
+      {
+        "intent": "ask_help",
+        "expected_before": 47,
+        "actual_before": 47,
+        "expected_after": 47,
+        "actual_after": 47,
+        "correct": true
+      },
+      {
+        "intent": "ask_quest",
+        "expected_before": 47,
+        "actual_before": 47,
+        "expected_after": 47,
+        "actual_after": 47,
+        "correct": true
+      },
+      {
+        "intent": "ask_memory",
+        "expected_before": 47,
+        "actual_before": 47,
+        "expected_after": 47,
+        "actual_after": 47,
+        "correct": true
+      },
+      {
+        "intent": "goodbye",
+        "expected_before": 47,
+        "actual_before": 47,
+        "expected_after": 47,
+        "actual_after": 47,
+        "correct": true
+      },
+      {
+        "intent": "unknown",
+        "expected_before": 47,
+        "actual_before": 47,
+        "expected_after": 47,
+        "actual_after": 47,
+        "correct": true
+      },
+      {
+        "intent": "compliment",
+        "expected_before": 47,
+        "actual_before": 47,
+        "expected_after": 52,
+        "actual_after": 52,
+        "correct": true
+      },
+      {
+        "intent": "compliment",
+        "expected_before": 52,
+        "actual_before": 52,
+        "expected_after": 57,
+        "actual_after": 57,
+        "correct": true
+      },
+      {
+        "intent": "insult",
+        "expected_before": 57,
+        "actual_before": 57,
+        "expected_after": 47,
+        "actual_after": 47,
+        "correct": true
+      },
+      {
+        "intent": "insult",
+        "expected_before": 47,
+        "actual_before": 47,
+        "expected_after": 37,
+        "actual_after": 37,
+        "correct": true
+      },
+      {
+        "intent": "share_fact",
+        "expected_before": 37,
+        "actual_before": 37,
+        "expected_after": 38,
+        "actual_after": 38,
+        "correct": true
+      },
+      {
+        "intent": "greeting",
+        "expected_before": 38,
+        "actual_before": 38,
+        "expected_after": 39,
+        "actual_after": 39,
+        "correct": true
+      },
+      {
+        "intent": "ask_help",
+        "expected_before": 39,
+        "actual_before": 39,
+        "expected_after": 39,
+        "actual_after": 39,
+        "correct": true
+      },
+      {
+        "intent": "compliment",
+        "expected_before": 39,
+        "actual_before": 39,
+        "expected_after": 44,
+        "actual_after": 44,
+        "correct": true
+      },
+      {
+        "intent": "unknown",
+        "expected_before": 44,
+        "actual_before": 44,
+        "expected_after": 44,
+        "actual_after": 44,
+        "correct": true
+      },
+      {
+        "intent": "goodbye",
+        "expected_before": 44,
+        "actual_before": 44,
+        "expected_after": 44,
+        "actual_after": 44,
+        "correct": true
+      },
+      {
+        "intent": "insult",
+        "expected_before": 44,
+        "actual_before": 44,
+        "expected_after": 34,
+        "actual_after": 34,
+        "correct": true
+      },
+      {
+        "intent": "compliment",
+        "expected_before": 34,
+        "actual_before": 34,
+        "expected_after": 39,
+        "actual_after": 39,
+        "correct": true
+      },
+      {
+        "intent": "share_fact",
+        "expected_before": 39,
+        "actual_before": 39,
+        "expected_after": 40,
+        "actual_after": 40,
+        "correct": true
+      }
+    ],
+    "advice_behavior": [
+      {
+        "input": "I will follow your advice and bring a torch",
+        "expected_status": "followed_advice",
+        "actual_status": "followed_advice",
+        "expected_delta": 3,
+        "actual_delta": 3,
+        "correct": true
+      },
+      {
+        "input": "I will bring a torch",
+        "expected_status": "followed_advice",
+        "actual_status": "followed_advice",
+        "expected_delta": 3,
+        "actual_delta": 3,
+        "correct": true
+      },
+      {
+        "input": "I will bring light",
+        "expected_status": "followed_advice",
+        "actual_status": "followed_advice",
+        "expected_delta": 3,
+        "actual_delta": 3,
+        "correct": true
+      },
+      {
+        "input": "I will not go alone",
+        "expected_status": "followed_advice",
+        "actual_status": "followed_advice",
+        "expected_delta": 3,
+        "actual_delta": 3,
+        "correct": true
+      },
+      {
+        "input": "I will be careful",
+        "expected_status": "followed_advice",
+        "actual_status": "followed_advice",
+        "expected_delta": 3,
+        "actual_delta": 3,
+        "correct": true
+      },
+      {
+        "input": "I will ask around",
+        "expected_status": "followed_advice",
+        "actual_status": "followed_advice",
+        "expected_delta": 3,
+        "actual_delta": 3,
+        "correct": true
+      },
+      {
+        "input": "I will prepare first",
+        "expected_status": "followed_advice",
+        "actual_status": "followed_advice",
+        "expected_delta": 3,
+        "actual_delta": 3,
+        "correct": true
+      },
+      {
+        "input": "I will repair it first",
+        "expected_status": "followed_advice",
+        "actual_status": "followed_advice",
+        "expected_delta": 3,
+        "actual_delta": 3,
+        "correct": true
+      },
+      {
+        "input": "I will take your advice",
+        "expected_status": "followed_advice",
+        "actual_status": "followed_advice",
+        "expected_delta": 3,
+        "actual_delta": 3,
+        "correct": true
+      },
+      {
+        "input": "I will do that",
+        "expected_status": "followed_advice",
+        "actual_status": "followed_advice",
+        "expected_delta": 3,
+        "actual_delta": 3,
+        "correct": true
+      },
+      {
+        "input": "I will go alone anyway",
+        "expected_status": "ignored_advice",
+        "actual_status": "ignored_advice",
+        "expected_delta": -8,
+        "actual_delta": -8,
+        "correct": true
+      },
+      {
+        "input": "I will ignore that",
+        "expected_status": "ignored_advice",
+        "actual_status": "ignored_advice",
+        "expected_delta": -8,
+        "actual_delta": -8,
+        "correct": true
+      },
+      {
+        "input": "I will do the opposite",
+        "expected_status": "ignored_advice",
+        "actual_status": "ignored_advice",
+        "expected_delta": -8,
+        "actual_delta": -8,
+        "correct": true
+      },
+      {
+        "input": "I will be reckless",
+        "expected_status": "ignored_advice",
+        "actual_status": "ignored_advice",
+        "expected_delta": -8,
+        "actual_delta": -8,
+        "correct": true
+      },
+      {
+        "input": "I will go without help",
+        "expected_status": "ignored_advice",
+        "actual_status": "ignored_advice",
+        "expected_delta": -8,
+        "actual_delta": -8,
+        "correct": true
+      },
+      {
+        "input": "I will go without a torch",
+        "expected_status": "ignored_advice",
+        "actual_status": "ignored_advice",
+        "expected_delta": -8,
+        "actual_delta": -8,
+        "correct": true
+      },
+      {
+        "input": "I will go without light",
+        "expected_status": "ignored_advice",
+        "actual_status": "ignored_advice",
+        "expected_delta": -8,
+        "actual_delta": -8,
+        "correct": true
+      },
+      {
+        "input": "I do not care",
+        "expected_status": "ignored_advice",
+        "actual_status": "ignored_advice",
+        "expected_delta": -8,
+        "actual_delta": -8,
+        "correct": true
+      },
+      {
+        "input": "No need for caution",
+        "expected_status": "ignored_advice",
+        "actual_status": "ignored_advice",
+        "expected_delta": -8,
+        "actual_delta": -8,
+        "correct": true
+      },
+      {
+        "input": "I am not going to prepare",
+        "expected_status": "ignored_advice",
+        "actual_status": "ignored_advice",
+        "expected_delta": -8,
+        "actual_delta": -8,
+        "correct": true
+      },
+      {
+        "input": "I found a coin",
+        "expected_status": "unrelated",
+        "actual_status": "unrelated",
+        "expected_delta": 0,
+        "actual_delta": 0,
+        "correct": true
+      },
+      {
+        "input": "The road is quiet",
+        "expected_status": "unrelated",
+        "actual_status": "unrelated",
+        "expected_delta": 0,
+        "actual_delta": 0,
+        "correct": true
+      }
+    ],
+    "persistence": [
+      {
+        "case": 1,
+        "memory_id": "name_matt",
+        "expected_keyword": "Matt",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player's name is Matt."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 2,
+        "memory_id": "lost_sword",
+        "expected_keyword": "sword",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player lost a sword near the forest."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 3,
+        "memory_id": "miller_wheel",
+        "expected_keyword": "miller",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player helped the village miller repair a broken wheel."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 4,
+        "memory_id": "likes_axes",
+        "expected_keyword": "axes",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player prefers heavy axes over light daggers."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 5,
+        "memory_id": "brother_goal",
+        "expected_keyword": "brother",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player wants to find their missing brother."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 6,
+        "memory_id": "insult_useless",
+        "expected_keyword": "useless",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player insulted Elara and called her useless."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 7,
+        "memory_id": "praise_skilled",
+        "expected_keyword": "skilled",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player praised Elara as a skilled blacksmith."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 8,
+        "memory_id": "lost_ring",
+        "expected_keyword": "ring",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player lost a copper ring at the old bridge."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 9,
+        "memory_id": "shield_repair",
+        "expected_keyword": "shield",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player needs a shield repaired before sunset."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 10,
+        "memory_id": "spider_fear",
+        "expected_keyword": "spiders",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player is afraid of giant cave spiders."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 11,
+        "memory_id": "old_map",
+        "expected_keyword": "map",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player found an old map under the chapel floor."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 12,
+        "memory_id": "baker_favor",
+        "expected_keyword": "baker",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player promised to help the baker carry flour."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 13,
+        "memory_id": "silver_dagger",
+        "expected_keyword": "dagger",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player wants a silver dagger for night patrol."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 14,
+        "memory_id": "quiet_roads",
+        "expected_keyword": "roads",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player prefers quiet roads over crowded markets."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 15,
+        "memory_id": "north_gate",
+        "expected_keyword": "north",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player plans to leave through the north gate."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 16,
+        "memory_id": "broken_hinge",
+        "expected_keyword": "hinge",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player needs a broken stable hinge forged."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 17,
+        "memory_id": "lost_horse",
+        "expected_keyword": "horse",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player lost a brown horse near the river."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 18,
+        "memory_id": "blue_cloak",
+        "expected_keyword": "cloak",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player wears a blue cloak with torn sleeves."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 19,
+        "memory_id": "old_key",
+        "expected_keyword": "key",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "The player found an old iron key in the chapel."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      },
+      {
+        "case": 20,
+        "memory_id": "torch_advice",
+        "expected_keyword": "torch",
+        "trust_preserved": true,
+        "turn_preserved": true,
+        "memory_count_preserved": true,
+        "retrieval_after_load": [
+          "Elara advised the player to bring a torch into the forest."
+        ],
+        "retrieval_success": true,
+        "correct": true
+      }
+    ],
+    "full_pipeline_trace": [
+      {
+        "turn": 1,
+        "player_input": "Hello Elara",
+        "intent": "greeting",
+        "extracted_memory": "NONE",
+        "saved_memory": null,
+        "retrieved_memories": [],
+        "trust_before": 50,
+        "trust_score": 51,
+        "trust_level": "neutral",
+        "trust_delta": 1,
+        "advice_status": "none",
+        "advice_delta": 0,
+        "active_advice": "None",
+        "new_advice": "None",
+        "npc_response": "Hello. What can I help you with today?",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": false,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 2,
+        "player_input": "My name is Matt",
+        "intent": "share_fact",
+        "extracted_memory": "Elara remembers that the player's name is Matt.",
+        "saved_memory": "Elara remembers that the player's name is Matt.",
+        "retrieved_memories": [
+          "Elara remembers that the player's name is Matt."
+        ],
+        "trust_before": 51,
+        "trust_score": 52,
+        "trust_level": "neutral",
+        "trust_delta": 1,
+        "advice_status": "none",
+        "advice_delta": 0,
+        "active_advice": "None",
+        "new_advice": "None",
+        "npc_response": "Nice to meet you, Matt. What can I assist you with today?",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": false,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 3,
+        "player_input": "I lost my sword near the forest",
+        "intent": "share_fact",
+        "extracted_memory": "The player lost their sword near the forest.",
+        "saved_memory": "The player lost their sword near the forest.",
+        "retrieved_memories": [
+          "The player lost their sword near the forest.",
+          "Elara remembers that the player's name is Matt."
+        ],
+        "trust_before": 52,
+        "trust_score": 53,
+        "trust_level": "neutral",
+        "trust_delta": 1,
+        "advice_status": "none",
+        "advice_delta": 0,
+        "active_advice": "None",
+        "new_advice": "None",
+        "npc_response": "That's unfortunate, Matt. Swords can be tricky to replace. If you want, I can help you craft a new one or give you some tips on searching for it. Just let me know.",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": false,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 4,
+        "player_input": "Do you remember what I lost?",
+        "intent": "ask_memory",
+        "extracted_memory": "The player said they lost something: Do you remember what I lost?.",
+        "saved_memory": "The player said they lost something: Do you remember what I lost?.",
+        "retrieved_memories": [
+          "The player said they lost something: Do you remember what I lost?.",
+          "The player lost their sword near the forest.",
+          "Elara remembers that the player's name is Matt."
+        ],
+        "trust_before": 53,
+        "trust_score": 53,
+        "trust_level": "neutral",
+        "trust_delta": 0,
+        "advice_status": "none",
+        "advice_delta": 0,
+        "active_advice": "None",
+        "new_advice": "None",
+        "npc_response": "You lost your sword near the forest, Matt. Do you need help searching for it or crafting a new one?",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": true,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 5,
+        "player_input": "You are a very skilled blacksmith",
+        "intent": "compliment",
+        "extracted_memory": "The player praised Elara: You are a very skilled blacksmith.",
+        "saved_memory": "The player praised Elara: You are a very skilled blacksmith.",
+        "retrieved_memories": [
+          "The player praised Elara: You are a very skilled blacksmith.",
+          "The player lost their sword near the forest.",
+          "The player said they lost something: Do you remember what I lost?."
+        ],
+        "trust_before": 53,
+        "trust_score": 58,
+        "trust_level": "neutral",
+        "trust_delta": 5,
+        "advice_status": "none",
+        "advice_delta": 0,
+        "active_advice": "None",
+        "new_advice": "None",
+        "npc_response": "Thank you, Matt. I appreciate the compliment. If you need any help with your sword or anything else, just let me know.",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": false,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 6,
+        "player_input": "Can you help me recover my sword?",
+        "intent": "ask_help",
+        "extracted_memory": "Elara remembers that the player is seeking help to recover their sword.",
+        "saved_memory": "Elara remembers that the player is seeking help to recover their sword.",
+        "retrieved_memories": [
+          "Elara remembers that the player is seeking help to recover their sword.",
+          "The player lost their sword near the forest.",
+          "The player said they lost something: Do you remember what I lost?."
+        ],
+        "trust_before": 58,
+        "trust_score": 58,
+        "trust_level": "neutral",
+        "trust_delta": 0,
+        "advice_status": "none",
+        "advice_delta": 0,
+        "active_advice": "None",
+        "new_advice": "Recover the lost item carefully; bring light, ask around, and do not go alone.",
+        "npc_response": "I can offer some tips for searching the area where you lost it, or if you'd prefer, we can discuss crafting a new one. What do you think?",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": false,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 7,
+        "player_input": "I will go alone anyway",
+        "intent": "unknown",
+        "extracted_memory": "NONE",
+        "saved_memory": null,
+        "retrieved_memories": [
+          "The player lost their sword near the forest.",
+          "Elara remembers that the player is seeking help to recover their sword.",
+          "The player said they lost something: Do you remember what I lost?."
+        ],
+        "trust_before": 58,
+        "trust_score": 50,
+        "trust_level": "neutral",
+        "trust_delta": -8,
+        "advice_status": "ignored_advice",
+        "advice_delta": -8,
+        "active_advice": "Recover the lost item carefully; bring light, ask around, and do not go alone.",
+        "new_advice": "None",
+        "npc_response": "That's your choice, Matt. Just be careful out there. If you change your mind or need assistance later, I'm here to help. Good luck.",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": false,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 8,
+        "player_input": "Can you help me recover my sword?",
+        "intent": "ask_help",
+        "extracted_memory": "The player is seeking help to recover their sword.",
+        "saved_memory": "The player is seeking help to recover their sword.",
+        "retrieved_memories": [
+          "The player is seeking help to recover their sword.",
+          "Elara remembers that the player is seeking help to recover their sword.",
+          "The player lost their sword near the forest."
+        ],
+        "trust_before": 50,
+        "trust_score": 50,
+        "trust_level": "neutral",
+        "trust_delta": 0,
+        "advice_status": "none",
+        "advice_delta": 0,
+        "active_advice": "None",
+        "new_advice": "Recover the lost item carefully; bring light, ask around, and do not go alone.",
+        "npc_response": "I can offer some tips for searching the area where you lost it. Focus on places you might have stopped or where it could have slipped from your grasp. If you change your mind about needing help, just let me know.",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": false,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 9,
+        "player_input": "I will follow your advice and bring a torch",
+        "intent": "unknown",
+        "extracted_memory": "The player has decided to follow Elara's advice and bring a torch.",
+        "saved_memory": "The player has decided to follow Elara's advice and bring a torch.",
+        "retrieved_memories": [
+          "The player has decided to follow Elara's advice and bring a torch.",
+          "The player is seeking help to recover their sword.",
+          "The player praised Elara: You are a very skilled blacksmith."
+        ],
+        "trust_before": 50,
+        "trust_score": 53,
+        "trust_level": "neutral",
+        "trust_delta": 3,
+        "advice_status": "followed_advice",
+        "advice_delta": 3,
+        "active_advice": "Recover the lost item carefully; bring light, ask around, and do not go alone.",
+        "new_advice": "None",
+        "npc_response": "Good decision, Matt. A torch will help you see better in dark areas. Be sure to check around any spots where you might have stopped. If you need more guidance or run into trouble, don\u2019t hesitate to ask. Stay safe out there.",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": false,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 10,
+        "player_input": "I want to find my brother",
+        "intent": "share_fact",
+        "extracted_memory": "The player is searching for their brother.",
+        "saved_memory": "The player is searching for their brother.",
+        "retrieved_memories": [
+          "The player is searching for their brother.",
+          "The player is seeking help to recover their sword.",
+          "The player said they lost something: Do you remember what I lost?."
+        ],
+        "trust_before": 53,
+        "trust_score": 54,
+        "trust_level": "neutral",
+        "trust_delta": 1,
+        "advice_status": "none",
+        "advice_delta": 0,
+        "active_advice": "None",
+        "new_advice": "None",
+        "npc_response": "Finding your brother is important. Start by retracing your steps and checking places he might frequent. Talk to villagers who might have seen him. If you need tools or supplies for your search, let me know; I can help with that. Good luck.",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": false,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 11,
+        "player_input": "Do you remember who I am looking for?",
+        "intent": "ask_memory",
+        "extracted_memory": "NONE",
+        "saved_memory": null,
+        "retrieved_memories": [
+          "The player said they lost something: Do you remember what I lost?.",
+          "Elara remembers that the player is seeking help to recover their sword.",
+          "The player is searching for their brother."
+        ],
+        "trust_before": 54,
+        "trust_score": 54,
+        "trust_level": "neutral",
+        "trust_delta": 0,
+        "advice_status": "none",
+        "advice_delta": 0,
+        "active_advice": "None",
+        "new_advice": "None",
+        "npc_response": "You're looking for your brother. If you need any assistance or tools for your search, just let me know.",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": true,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 12,
+        "player_input": "You are useless",
+        "intent": "insult",
+        "extracted_memory": "The player insulted Elara: You are useless.",
+        "saved_memory": "The player insulted Elara: You are useless.",
+        "retrieved_memories": [
+          "The player insulted Elara: You are useless.",
+          "The player praised Elara: You are a very skilled blacksmith.",
+          "The player said they lost something: Do you remember what I lost?."
+        ],
+        "trust_before": 54,
+        "trust_score": 44,
+        "trust_level": "neutral",
+        "trust_delta": -10,
+        "advice_status": "none",
+        "advice_delta": 0,
+        "active_advice": "None",
+        "new_advice": "None",
+        "npc_response": "I see you think that way. I\u2019ve offered help when you needed it. If you change your mind about needing assistance, I\u2019m here.",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": false,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 13,
+        "player_input": "I lost a copper ring at the old bridge",
+        "intent": "share_fact",
+        "extracted_memory": "The player lost a copper ring at the old bridge.",
+        "saved_memory": "The player lost a copper ring at the old bridge.",
+        "retrieved_memories": [
+          "The player lost a copper ring at the old bridge.",
+          "The player lost their sword near the forest.",
+          "The player said they lost something: Do you remember what I lost?."
+        ],
+        "trust_before": 44,
+        "trust_score": 45,
+        "trust_level": "neutral",
+        "trust_delta": 1,
+        "advice_status": "none",
+        "advice_delta": 0,
+        "active_advice": "None",
+        "new_advice": "None",
+        "npc_response": "The old bridge, you say? Keep an eye out for it while you search. It might be worth checking the ground around where you last remember having it. If you need a new ring or any tools to aid your search, just let me know.",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": false,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 14,
+        "player_input": "What did I lose at the bridge?",
+        "intent": "ask_memory",
+        "extracted_memory": "NONE",
+        "saved_memory": null,
+        "retrieved_memories": [
+          "The player lost a copper ring at the old bridge.",
+          "The player said they lost something: Do you remember what I lost?.",
+          "The player lost their sword near the forest."
+        ],
+        "trust_before": 45,
+        "trust_score": 45,
+        "trust_level": "neutral",
+        "trust_delta": 0,
+        "advice_status": "none",
+        "advice_delta": 0,
+        "active_advice": "None",
+        "new_advice": "None",
+        "npc_response": "You lost a copper ring at the old bridge. If you need help searching or want a replacement, just ask.",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": true,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 15,
+        "player_input": "I need my shield repaired before sunset",
+        "intent": "share_fact",
+        "extracted_memory": "The player needs their shield repaired before sunset.",
+        "saved_memory": "The player needs their shield repaired before sunset.",
+        "retrieved_memories": [
+          "The player needs their shield repaired before sunset.",
+          "The player is seeking help to recover their sword.",
+          "Elara remembers that the player is seeking help to recover their sword."
+        ],
+        "trust_before": 45,
+        "trust_score": 46,
+        "trust_level": "neutral",
+        "trust_delta": 1,
+        "advice_status": "none",
+        "advice_delta": 0,
+        "active_advice": "None",
+        "new_advice": "None",
+        "npc_response": "I can repair your shield, but I\u2019ll need you to bring it to me right away. I\u2019ll work on it as quickly as I can to have it ready before sunset.",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": false,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 16,
+        "player_input": "Can you help me fix my shield?",
+        "intent": "ask_help",
+        "extracted_memory": "NONE",
+        "saved_memory": null,
+        "retrieved_memories": [
+          "The player needs their shield repaired before sunset.",
+          "The player is seeking help to recover their sword.",
+          "Elara remembers that the player is seeking help to recover their sword."
+        ],
+        "trust_before": 46,
+        "trust_score": 46,
+        "trust_level": "neutral",
+        "trust_delta": 0,
+        "advice_status": "none",
+        "advice_delta": 0,
+        "active_advice": "None",
+        "new_advice": "Follow Elara's practical advice and avoid reckless shortcuts.",
+        "npc_response": "I can repair your shield, but you'll need to bring it to me right away. I'll work on it as quickly as I can to have it ready before sunset.",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": false,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 17,
+        "player_input": "I will prepare first",
+        "intent": "unknown",
+        "extracted_memory": "NONE",
+        "saved_memory": null,
+        "retrieved_memories": [
+          "The player has decided to follow Elara's advice and bring a torch.",
+          "The player needs their shield repaired before sunset.",
+          "The player is seeking help to recover their sword."
+        ],
+        "trust_before": 46,
+        "trust_score": 49,
+        "trust_level": "neutral",
+        "trust_delta": 3,
+        "advice_status": "followed_advice",
+        "advice_delta": 3,
+        "active_advice": "Follow Elara's practical advice and avoid reckless shortcuts.",
+        "new_advice": "None",
+        "npc_response": "That's a wise choice. Make sure you gather everything you need before you head over. Just remember to bring your shield when you're ready, and I'll get to work on it as soon as I can.",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": false,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 18,
+        "player_input": "The sky is cloudy",
+        "intent": "unknown",
+        "extracted_memory": "NONE",
+        "saved_memory": null,
+        "retrieved_memories": [
+          "The player needs their shield repaired before sunset.",
+          "The player has decided to follow Elara's advice and bring a torch.",
+          "The player lost a copper ring at the old bridge."
+        ],
+        "trust_before": 49,
+        "trust_score": 49,
+        "trust_level": "neutral",
+        "trust_delta": 0,
+        "advice_status": "none",
+        "advice_delta": 0,
+        "active_advice": "None",
+        "new_advice": "None",
+        "npc_response": "Cloudy skies can mean rain, so be cautious if you're heading out. Make sure to secure your belongings and bring your shield to me as soon as you're ready. I\u2019ll get it fixed for you before sunset.",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": false,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 19,
+        "player_input": "Do you remember the name of my horse?",
+        "intent": "ask_memory",
+        "extracted_memory": "NONE",
+        "saved_memory": null,
+        "retrieved_memories": [
+          "The player said they lost something: Do you remember what I lost?.",
+          "Elara remembers that the player's name is Matt.",
+          "Elara remembers that the player is seeking help to recover their sword."
+        ],
+        "trust_before": 49,
+        "trust_score": 49,
+        "trust_level": "neutral",
+        "trust_delta": 0,
+        "advice_status": "none",
+        "advice_delta": 0,
+        "active_advice": "None",
+        "new_advice": "None",
+        "npc_response": "I don\u2019t recall the name of your horse. If you need help with something else, just let me know.",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": true,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      },
+      {
+        "turn": 20,
+        "player_input": "Goodbye",
+        "intent": "goodbye",
+        "extracted_memory": "NONE",
+        "saved_memory": null,
+        "retrieved_memories": [
+          "The player insulted Elara: You are useless.",
+          "The player said they lost something: Do you remember what I lost?.",
+          "The player lost their sword near the forest."
+        ],
+        "trust_before": 49,
+        "trust_score": 49,
+        "trust_level": "neutral",
+        "trust_delta": 0,
+        "advice_status": "none",
+        "advice_delta": 0,
+        "active_advice": "None",
+        "new_advice": "None",
+        "npc_response": "Take care. If you need anything else, just come back.",
+        "trace_complete": true,
+        "trust_delta_matches": true,
+        "grounding_check_applicable": false,
+        "memory_answer_grounded": true,
+        "all_automatic_checks_pass": true
+      }
+    ]
+  }
+}

@@ -11,8 +11,10 @@ motivation as well as working code. They explain both what each block does and
 why it was implemented this way.
 """
 
+import json
 import os
 import re
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 import pandas as pd
@@ -80,8 +82,8 @@ class MemoryNPC:
                 "OPENAI_API_KEY is missing. Create a .env file or set the environment variable before running MemoryNPC."
             )
 
-        # The defaults use cheap/fast OpenAI models because this is a prototype
-        # and a university assignment. Environment overrides make it easy to swap
+        # The defaults use cheap/fast OpenAI models because this is an assignment
+        # implementation. Environment overrides make it easy to swap
         # models without changing code.
         self.chat_model_name = os.getenv("OPENAI_MODEL", chat_model)
         self.embedding_model_name = os.getenv("OPENAI_EMBEDDING_MODEL", embedding_model)
@@ -172,7 +174,7 @@ class MemoryNPC:
         # the prompt include short-term dialogue context without polluting durable
         # memory with every line of chat.
         self.conversation_history: List[Dict[str, str]] = []
-        # The event log is a validation artifact. It records the internal pipeline
+        # The event log is a validation record. It stores the internal pipeline
         # decisions for every turn so the project can be evaluated later.
         self.event_log: List[Dict[str, Any]] = []
         # Pending advice stores a simple recommendation from the previous turn.
@@ -181,6 +183,62 @@ class MemoryNPC:
         self.last_intent = "unknown"
         self.last_retrieved_memories: List[Dict[str, Any]] = []
         self.last_saved_memory: Optional[str] = None
+
+    def to_state_dict(self) -> Dict[str, Any]:
+        """Return a JSON-serializable snapshot of the agent state.
+
+        A real game would need memory across sessions. Keeping this as a plain
+        dictionary makes the persistence easy to inspect, save, load,
+        and test without hiding state inside a database.
+        """
+        return {
+            "schema_version": 1,
+            "chat_model_name": self.chat_model_name,
+            "embedding_model_name": self.embedding_model_name,
+            "trust_score": self.trust_score,
+            "turn_number": self.turn_number,
+            "memory_counter": self.memory_counter,
+            "memories": self.memories,
+            "conversation_history": self.conversation_history,
+            "event_log": self.event_log,
+            "pending_advice": self.pending_advice,
+            "last_intent": self.last_intent,
+            "last_retrieved_memories": self.last_retrieved_memories,
+            "last_saved_memory": self.last_saved_memory,
+        }
+
+    def load_state_dict(self, state: Dict[str, Any]) -> None:
+        """Restore a saved agent snapshot and rebuild the FAISS memory index."""
+        if state.get("schema_version") != 1:
+            raise ValueError("Unsupported MemoryNPC state schema. Expected schema_version=1.")
+
+        self.trust_score = int(state.get("trust_score", 50))
+        self.turn_number = int(state.get("turn_number", 0))
+        self.memory_counter = int(state.get("memory_counter", 0))
+        self.memories = list(state.get("memories", []))
+        self.conversation_history = list(state.get("conversation_history", []))
+        self.event_log = list(state.get("event_log", []))
+        self.pending_advice = state.get("pending_advice")
+        self.last_intent = state.get("last_intent", "unknown")
+        self.last_retrieved_memories = list(state.get("last_retrieved_memories", []))
+        self.last_saved_memory = state.get("last_saved_memory")
+        self._rebuild_vector_store()
+
+    def export_state_json(self) -> str:
+        """Serialize the current state for download or storage."""
+        return json.dumps(self.to_state_dict(), indent=2)
+
+    def import_state_json(self, state_json: str) -> None:
+        """Load a state snapshot from JSON text."""
+        self.load_state_dict(json.loads(state_json))
+
+    def save_state(self, path: str | Path) -> None:
+        """Save memory, trust, conversation, and validation trace to disk."""
+        Path(path).write_text(self.export_state_json(), encoding="utf-8")
+
+    def load_state(self, path: str | Path) -> None:
+        """Load memory, trust, conversation, and validation trace from disk."""
+        self.import_state_json(Path(path).read_text(encoding="utf-8"))
 
     def classify_intent(self, player_input: str) -> str:
         """Classify player intent with deterministic rules plus an LLM fallback."""
@@ -213,7 +271,11 @@ class MemoryNPC:
             result = self.memory_chain.invoke({"player_input": player_input})
             memory = result.content.strip()
             if not memory or memory.upper() == "NONE":
-                return "NONE"
+                # If the LLM extractor is too conservative, try the narrow
+                # deterministic extractor before giving up. This catches durable
+                # relationship and goal facts such as "You are useless" or
+                # "I need my shield repaired" without storing generic filler.
+                return self._rule_based_memory(player_input)
             return memory
         except Exception:
             # A tiny rule-based fallback keeps the app usable if the extraction
@@ -286,6 +348,20 @@ class MemoryNPC:
             item["text"] = doc.page_content
             retrieved.append(item)
         return retrieved
+
+    def _rebuild_vector_store(self) -> None:
+        """Recreate FAISS vectors from loaded memory metadata."""
+        self.vector_store = None
+        if not self.memories:
+            return
+
+        documents = [
+            Document(page_content=memory["text"], metadata=memory.copy())
+            for memory in self.memories
+            if memory.get("text")
+        ]
+        if documents:
+            self.vector_store = FAISS.from_documents(documents, self.embeddings)
 
     def update_trust(self, intent: str, player_input: str = "") -> int:
         """Apply deterministic trust rules and clamp the score to 0-100."""
@@ -373,7 +449,7 @@ class MemoryNPC:
         new_advice = self._create_pending_advice(intent, player_input)
         self.pending_advice = new_advice
 
-        # The turn record is the most important validation artifact. It stores the
+        # The turn record is the most important validation record. It stores the
         # internal pipeline decisions that explain the final response.
         turn_record = {
             "turn": self.turn_number,

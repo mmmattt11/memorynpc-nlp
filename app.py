@@ -15,7 +15,7 @@ from npc_agent import MemoryNPC
 
 
 # Keep the page configuration minimal. A simple interface makes it easier for a
-# teacher to inspect the NLP state instead of being distracted by UI complexity.
+# Keep the page configuration minimal so the NLP state stays easy to inspect.
 st.set_page_config(page_title="MemoryNPC Demo")
 
 st.title("MemoryNPC Demo")
@@ -32,6 +32,15 @@ def create_agent() -> MemoryNPC:
     load and when the reset button is clicked.
     """
     return MemoryNPC()
+
+
+def chat_rows_from_agent(agent: MemoryNPC) -> list[dict[str, str]]:
+    """Convert backend conversation history into Streamlit chat rows."""
+    rows = []
+    for item in agent.get_conversation_history():
+        role = "assistant" if item["speaker"] == "Elara" else "user"
+        rows.append({"role": role, "content": item["text"]})
+    return rows
 
 
 def render_sidebar() -> None:
@@ -62,6 +71,25 @@ def render_sidebar() -> None:
             st.error(st.session_state.error)
         elif st.session_state.agent:
             agent = st.session_state.agent
+
+            st.subheader("Persistence")
+            st.download_button(
+                "Download memory state",
+                agent.export_state_json(),
+                file_name="memorynpc_state.json",
+                mime="application/json",
+            )
+            uploaded_state = st.file_uploader("Load memory state", type=["json"])
+            if uploaded_state is not None and st.button("Apply loaded state"):
+                try:
+                    agent.import_state_json(uploaded_state.getvalue().decode("utf-8"))
+                    st.session_state.chat_rows = chat_rows_from_agent(agent)
+                    st.session_state.error = None
+                    st.rerun()
+                except Exception as exc:
+                    st.session_state.error = f"Could not load memory state: {exc}"
+                    st.rerun()
+
             # The numeric score is the deterministic relationship state.
             st.metric("Trust score", agent.trust_score)
             # The band explains how the numeric score affects dialogue tone.

@@ -1,0 +1,23 @@
+input,expected_status,actual_status,expected_delta,actual_delta,correct
+I will follow your advice and bring a torch,followed_advice,followed_advice,3,3,True
+I will bring a torch,followed_advice,followed_advice,3,3,True
+I will bring light,followed_advice,followed_advice,3,3,True
+I will not go alone,followed_advice,followed_advice,3,3,True
+I will be careful,followed_advice,followed_advice,3,3,True
+I will ask around,followed_advice,followed_advice,3,3,True
+I will prepare first,followed_advice,followed_advice,3,3,True
+I will repair it first,followed_advice,followed_advice,3,3,True
+I will take your advice,followed_advice,followed_advice,3,3,True
+I will do that,followed_advice,followed_advice,3,3,True
+I will go alone anyway,ignored_advice,ignored_advice,-8,-8,True
+I will ignore that,ignored_advice,ignored_advice,-8,-8,True
+I will do the opposite,ignored_advice,ignored_advice,-8,-8,True
+I will be reckless,ignored_advice,ignored_advice,-8,-8,True
+I will go without help,ignored_advice,ignored_advice,-8,-8,True
+I will go without a torch,ignored_advice,ignored_advice,-8,-8,True
+I will go without light,ignored_advice,ignored_advice,-8,-8,True
+I do not care,ignored_advice,ignored_advice,-8,-8,True
+No need for caution,ignored_advice,ignored_advice,-8,-8,True
+I am not going to prepare,ignored_advice,ignored_advice,-8,-8,True
+I found a coin,unrelated,unrelated,0,0,True
+The road is quiet,unrelated,unrelated,0,0,True
