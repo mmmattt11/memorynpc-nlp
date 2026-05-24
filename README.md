@@ -102,7 +102,7 @@ The notebook also includes a keyword retrieval baseline. This checks whether a s
 ## Installation
 
 ```bash
-git clone <repository-url>
+git clone (https://github.com/mmmattt11/memorynpc-nlp)
 cd memorynpc_project
 python -m venv .venv
 source .venv/bin/activate
