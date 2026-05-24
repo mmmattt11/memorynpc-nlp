@@ -7511,102 +7511,52 @@ a.anchor-link {
 <!-- End of mermaid configuration --></head>
 <body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
 <main>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=68b67d00">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=9c411e94">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Validation-Report">Validation Report<a class="anchor-link" href="#Validation-Report">¶</a></h1><p>This notebook records the validation I ran for my MemoryNPC university NLP assignment. I tested every major metric with at least 20 cases and saved the results as CSV/JSON result files under <code>results/validation/</code>.</p>
-<p>The goal is not to claim general perfection. The goal is to show that I tested the system repeatedly across the parts that matter: intent, memory extraction, retrieval, baseline comparison, trust, advice behavior, persistence, trace completeness, and response-grounding checks.</p>
+<h1 id="MemoryNPC-Validation-Report">MemoryNPC Validation Report<a class="anchor-link" href="#MemoryNPC-Validation-Report">¶</a></h1><p>This notebook summarizes the validation I ran for my MemoryNPC NLP project. I tested every major metric with at least 20 cases where possible and kept the results here so the project can be reviewed without running extra scripts.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ad03970e">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=e5c7c36e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Metrics-Tested">Metrics Tested<a class="anchor-link" href="#Metrics-Tested">¶</a></h2><table>
-<thead>
-<tr>
-<th>Metric</th>
-<th style="text-align:right">Number of cases</th>
-<th>What it checks</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Intent classification</td>
-<td style="text-align:right">30</td>
-<td>Whether player utterances map to the expected closed-label intent set.</td>
-</tr>
-<tr>
-<td>Memory extraction selectivity</td>
-<td style="text-align:right">22</td>
-<td>Whether durable facts are saved and filler is ignored.</td>
-</tr>
-<tr>
-<td>FAISS semantic retrieval</td>
-<td style="text-align:right">25</td>
-<td>Whether expected memories appear in top-3 semantic retrieval.</td>
-</tr>
-<tr>
-<td>Keyword retrieval baseline</td>
-<td style="text-align:right">25</td>
-<td>Word-overlap baseline for comparison with FAISS.</td>
-</tr>
-<tr>
-<td>Trust rule validation</td>
-<td style="text-align:right">22</td>
-<td>Deterministic trust arithmetic for intent-based trust changes.</td>
-</tr>
-<tr>
-<td>Advice behavior validation</td>
-<td style="text-align:right">22</td>
-<td>Whether following or ignoring advice changes trust correctly.</td>
-</tr>
-<tr>
-<td>Persistence roundtrip</td>
-<td style="text-align:right">20</td>
-<td>Whether JSON state export/import preserves memory and retrieval.</td>
-</tr>
-<tr>
-<td>Full-pipeline trace completeness</td>
-<td style="text-align:right">20</td>
-<td>Whether every generated turn logs the required trace fields.</td>
-</tr>
-<tr>
-<td>Full-pipeline trust arithmetic</td>
-<td style="text-align:right">20</td>
-<td>Whether logged trust deltas match before/after scores.</td>
-</tr>
-<tr>
-<td>Full-pipeline automatic response checks</td>
-<td style="text-align:right">20</td>
-<td>Whether generated turns pass trace and grounding checks.</td>
-</tr>
-</tbody>
-</table>
+<h2 id="What-I-Tested">What I Tested<a class="anchor-link" href="#What-I-Tested">¶</a></h2><p>I tested the main parts of the system:</p>
+<ul>
+<li>intent classification;</li>
+<li>memory extraction selectivity;</li>
+<li>FAISS semantic retrieval;</li>
+<li>keyword retrieval baseline;</li>
+<li>trust rule validation;</li>
+<li>advice-following behavior;</li>
+<li>JSON persistence;</li>
+<li>full-pipeline trace completeness;</li>
+<li>trust arithmetic in logged traces;</li>
+<li>automatic response checks.</li>
+</ul>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=8d23205b">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=71c90365">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Final-Summary">Final Summary<a class="anchor-link" href="#Final-Summary">¶</a></h2><table>
+<h2 id="Results">Results<a class="anchor-link" href="#Results">¶</a></h2><table>
 <thead>
 <tr>
 <th>Metric</th>
 <th style="text-align:right">Cases</th>
-<th style="text-align:right">Success rate</th>
-<th>Target</th>
+<th style="text-align:right">Result</th>
 </tr>
 </thead>
 <tbody>
@@ -7614,61 +7564,51 @@ a.anchor-link {
 <td>Intent classification</td>
 <td style="text-align:right">30</td>
 <td style="text-align:right">100%</td>
-<td>&gt;= 80%</td>
 </tr>
 <tr>
 <td>Memory extraction selectivity</td>
 <td style="text-align:right">22</td>
 <td style="text-align:right">100%</td>
-<td>&gt;= 80%</td>
 </tr>
 <tr>
 <td>FAISS semantic retrieval</td>
 <td style="text-align:right">25</td>
 <td style="text-align:right">100%</td>
-<td>&gt;= 80%</td>
 </tr>
 <tr>
 <td>Keyword retrieval baseline</td>
 <td style="text-align:right">25</td>
 <td style="text-align:right">88%</td>
-<td>comparison baseline</td>
 </tr>
 <tr>
 <td>Trust rule validation</td>
 <td style="text-align:right">22</td>
 <td style="text-align:right">100%</td>
-<td>100% deterministic</td>
 </tr>
 <tr>
 <td>Advice behavior validation</td>
 <td style="text-align:right">22</td>
 <td style="text-align:right">100%</td>
-<td>100% deterministic</td>
 </tr>
 <tr>
 <td>Persistence roundtrip</td>
 <td style="text-align:right">20</td>
 <td style="text-align:right">100%</td>
-<td>100% deterministic</td>
 </tr>
 <tr>
 <td>Full-pipeline trace completeness</td>
 <td style="text-align:right">20</td>
 <td style="text-align:right">100%</td>
-<td>100%</td>
 </tr>
 <tr>
 <td>Full-pipeline trust arithmetic</td>
 <td style="text-align:right">20</td>
 <td style="text-align:right">100%</td>
-<td>100%</td>
 </tr>
 <tr>
 <td>Full-pipeline automatic response checks</td>
 <td style="text-align:right">20</td>
 <td style="text-align:right">100%</td>
-<td>&gt;= 80%</td>
 </tr>
 </tbody>
 </table>
@@ -7676,108 +7616,47 @@ a.anchor-link {
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=d0f778c9">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ddb07d12">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Result-Interpretation">Result Interpretation<a class="anchor-link" href="#Result-Interpretation">¶</a></h2><p>The validation supports the project in three ways.</p>
-<p>First, every main system metric is tested at least 20 times, so the validation is less dependent on a handful of examples. Second, the keyword baseline remains lower than FAISS retrieval, which motivates the vector-store design choice. Third, the first run found a memory-extraction weakness, so I fixed the backend by adding a deterministic fallback when the LLM extractor returns <code>NONE</code> for durable facts. The final run below reflects the corrected system.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=c756fda2">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Standard-library check that the result files exist and contain the expected row counts.</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-
-<span class="n">RESULT_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"results/validation"</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="p">[</span>
-    <span class="s2">"intent"</span><span class="p">,</span>
-    <span class="s2">"memory_extraction"</span><span class="p">,</span>
-    <span class="s2">"faiss_retrieval"</span><span class="p">,</span>
-    <span class="s2">"keyword_baseline"</span><span class="p">,</span>
-    <span class="s2">"trust_rules"</span><span class="p">,</span>
-    <span class="s2">"advice_behavior"</span><span class="p">,</span>
-    <span class="s2">"persistence"</span><span class="p">,</span>
-    <span class="s2">"full_pipeline_trace"</span><span class="p">,</span>
-<span class="p">]:</span>
-    <span class="n">rows</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">((</span><span class="n">RESULT_DIR</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.csv"</span><span class="p">)</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="si">}</span><span class="s2"> rows"</span><span class="p">)</span>
-</pre></div>
+<h2 id="Interpretation">Interpretation<a class="anchor-link" href="#Interpretation">¶</a></h2><p>The validation supports the project because every main system metric passed the controlled test cases. The keyword baseline is intentionally weaker and scored 88%, which supports the design choice to use embeddings and FAISS for semantic memory retrieval.</p>
+<p>These results are controlled assignment results on manually designed cases. They show that the pipeline behaves consistently on the tested examples, but they are not a claim that the system is perfect on every possible player message.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>intent: 30 rows
-memory_extraction: 22 rows
-faiss_retrieval: 25 rows
-keyword_baseline: 25 rows
-trust_rules: 22 rows
-advice_behavior: 22 rows
-persistence: 20 rows
-full_pipeline_trace: 20 rows
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=acc0dca5">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=49ca53a6">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Failure-Analysis">Failure Analysis<a class="anchor-link" href="#Failure-Analysis">¶</a></h2><p>After the final corrected run, the main system metrics have no failing rows. The keyword baseline still fails three semantic retrieval cases, which is expected and helpful because it shows why FAISS embeddings were chosen.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=42ab3f93">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Keyword-Baseline-Failures">Keyword Baseline Failures<a class="anchor-link" href="#Keyword-Baseline-Failures">¶</a></h3><table>
+<h2 id="Keyword-Baseline-Failure-Cases">Keyword Baseline Failure Cases<a class="anchor-link" href="#Keyword-Baseline-Failure-Cases">¶</a></h2><table>
 <thead>
 <tr>
 <th>Query</th>
 <th>Expected keyword</th>
-<th>Keyword top 3</th>
+<th>Why keyword baseline failed</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>What kind of weapon do I prefer?</td>
 <td>axes</td>
-<td><code>['The player is afraid of giant cave spiders.', 'The player is afraid of wolves near the ridge.']</code></td>
+<td>Keyword overlap retrieved unrelated memories because the query did not share the exact word <code>axes</code>.</td>
 </tr>
 <tr>
 <td>Who am I searching for in my family?</td>
 <td>brother</td>
-<td><code>['The player is searching for their missing sister.', 'The player wants a silver dagger for night patrol.', 'The player found an old iron key in the chapel.']</code></td>
+<td>Keyword overlap confused family-search memories because it does not understand the intended relation.</td>
 </tr>
 <tr>
 <td>What creature scares me in caves?</td>
 <td>spiders</td>
-<td><code>['The player found an old iron key in the chapel.']</code></td>
+<td>Keyword overlap missed the semantically relevant fear memory.</td>
 </tr>
 </tbody>
 </table>
@@ -7785,591 +7664,30 @@ full_pipeline_trace: 20 rows
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=37944237">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=b486000e">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Validation-Driven-Fix">Validation-Driven Fix<a class="anchor-link" href="#Validation-Driven-Fix">¶</a></h2><p>The first extended run revealed that the direct <code>extract_memory()</code> method was too conservative for three durable utterances:</p>
+<h2 id="Validation-Driven-Fix">Validation-Driven Fix<a class="anchor-link" href="#Validation-Driven-Fix">¶</a></h2><p>The first larger validation run found a direct memory-extraction weakness. The LLM extractor returned <code>NONE</code> for some durable utterances such as:</p>
 <ul>
 <li><code>You are a skilled blacksmith</code></li>
 <li><code>You are useless</code></li>
 <li><code>I need a quiet road north</code></li>
 </ul>
-<p>The full pipeline already had a later fallback, but the extraction method itself did not. I fixed this by making <code>extract_memory()</code> call the narrow rule-based fallback when the LLM extractor returns <code>NONE</code>. This improved memory extraction selectivity from 86% to 100% on the extended 22-case set.</p>
+<p>I fixed this by making <code>extract_memory()</code> call a narrow rule-based fallback when the LLM extractor returns <code>NONE</code>. After this fix, memory extraction selectivity improved from 86% to 100% on the 22-case validation set.</p>
 </div>
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=dcd1733a">
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=97ba9211">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Stored-Artifacts">Stored Artifacts<a class="anchor-link" href="#Stored-Artifacts">¶</a></h2><p>The run writes:</p>
-<ul>
-<li><code>results/validation/summary.csv</code></li>
-<li><code>results/validation/validation_results.json</code></li>
-<li>one CSV per metric, including intent, memory extraction, FAISS retrieval, keyword baseline, trust, advice, persistence, and full-pipeline trace.</li>
-</ul>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=786421be">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">"results/validation"</span><span class="p">)</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>results/validation/advice_behavior.csv
-results/validation/faiss_retrieval.csv
-results/validation/full_pipeline_trace.csv
-results/validation/intent.csv
-results/validation/keyword_baseline.csv
-results/validation/memory_extraction.csv
-results/validation/persistence.csv
-results/validation/summary.csv
-results/validation/trust_rules.csv
-results/validation/validation_results.json
-</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=7f99de7d">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Script-Used-For-The-Run">Script Used For The Run<a class="anchor-link" href="#Script-Used-For-The-Run">¶</a></h2><p>The complete validation script is included below so the experiment is reproducible.</p>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=360ad44e">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<div class="highlight"><pre><span></span><span class="sd">"""Validation suite for the MemoryNPC NLP assignment.</span>
-
-<span class="sd">Each metric is tested with at least 20 cases and written to JSON/CSV result</span>
-<span class="sd">files so the results can be inspected outside the notebook.</span>
-<span class="sd">"""</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">__future__</span><span class="w"> </span><span class="kn">import</span> <span class="n">annotations</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-
-<span class="kn">from</span><span class="w"> </span><span class="nn">evaluation_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">automatic_response_checks</span><span class="p">,</span> <span class="n">keyword_retrieve</span><span class="p">,</span> <span class="n">retrieval_success</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">npc_agent</span><span class="w"> </span><span class="kn">import</span> <span class="n">MemoryNPC</span>
-
-
-<span class="n">RESULT_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">"results/validation"</span><span class="p">)</span>
-<span class="n">RESULT_DIR</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-
-
-<span class="n">INTENT_CASES</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s2">"Hello Elara"</span><span class="p">,</span> <span class="s2">"greeting"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Hi there blacksmith"</span><span class="p">,</span> <span class="s2">"greeting"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Good morning"</span><span class="p">,</span> <span class="s2">"greeting"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Greetings from the north road"</span><span class="p">,</span> <span class="s2">"greeting"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Goodbye for now"</span><span class="p">,</span> <span class="s2">"goodbye"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Farewell Elara"</span><span class="p">,</span> <span class="s2">"goodbye"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"See you later"</span><span class="p">,</span> <span class="s2">"goodbye"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Can you give me a quest?"</span><span class="p">,</span> <span class="s2">"ask_quest"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Do you have a mission for me?"</span><span class="p">,</span> <span class="s2">"ask_quest"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Any job for me today?"</span><span class="p">,</span> <span class="s2">"ask_quest"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"My name is Matt"</span><span class="p">,</span> <span class="s2">"share_fact"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I lost a silver dagger"</span><span class="p">,</span> <span class="s2">"share_fact"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I want to find my brother"</span><span class="p">,</span> <span class="s2">"share_fact"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I like heavy axes"</span><span class="p">,</span> <span class="s2">"share_fact"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Do you remember my name?"</span><span class="p">,</span> <span class="s2">"ask_memory"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"What did I lose earlier?"</span><span class="p">,</span> <span class="s2">"ask_memory"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Can you recall what I told you?"</span><span class="p">,</span> <span class="s2">"ask_memory"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"You are a skilled blacksmith"</span><span class="p">,</span> <span class="s2">"compliment"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Thanks, that was great"</span><span class="p">,</span> <span class="s2">"compliment"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"That repair was excellent"</span><span class="p">,</span> <span class="s2">"compliment"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"You are useless"</span><span class="p">,</span> <span class="s2">"insult"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"That was a terrible repair"</span><span class="p">,</span> <span class="s2">"insult"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I hate your work"</span><span class="p">,</span> <span class="s2">"insult"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Can you help me fix my shield?"</span><span class="p">,</span> <span class="s2">"ask_help"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Please assist me with this blade"</span><span class="p">,</span> <span class="s2">"ask_help"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Can you forge a hinge?"</span><span class="p">,</span> <span class="s2">"ask_help"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"The sky is cloudy"</span><span class="p">,</span> <span class="s2">"unknown"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Maybe the moon is made of iron"</span><span class="p">,</span> <span class="s2">"unknown"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"The rain sounds loud"</span><span class="p">,</span> <span class="s2">"unknown"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Clouds pass over the village"</span><span class="p">,</span> <span class="s2">"unknown"</span><span class="p">),</span>
-<span class="p">]</span>
-
-
-<span class="n">MEMORY_EXTRACTION_CASES</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s2">"My name is Matt"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"My name is Lena"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I lost a sword near the forest"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I lost a copper ring at the bridge"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I want to find my brother"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I need my shield repaired before sunset"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I like heavy axes"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I found a strange map"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"You are a skilled blacksmith"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"You are useless"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I promised to help the miller"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I am afraid of cave spiders"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I need a quiet road north"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I want a dagger made of silver"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I found an old key in the chapel"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I helped the baker yesterday"</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Hello there"</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Goodbye"</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"The weather is gray today"</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"The moon looks bright"</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Clouds are moving slowly"</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"It is noisy today"</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
-<span class="p">]</span>
-
-
-<span class="n">RETRIEVAL_MEMORIES</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s2">"name_matt"</span><span class="p">,</span> <span class="s2">"The player's name is Matt."</span><span class="p">,</span> <span class="s2">"Matt"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"lost_sword"</span><span class="p">,</span> <span class="s2">"The player lost a sword near the forest."</span><span class="p">,</span> <span class="s2">"sword"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"miller_wheel"</span><span class="p">,</span> <span class="s2">"The player helped the village miller repair a broken wheel."</span><span class="p">,</span> <span class="s2">"miller"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"likes_axes"</span><span class="p">,</span> <span class="s2">"The player prefers heavy axes over light daggers."</span><span class="p">,</span> <span class="s2">"axes"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"brother_goal"</span><span class="p">,</span> <span class="s2">"The player wants to find their missing brother."</span><span class="p">,</span> <span class="s2">"brother"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"insult_useless"</span><span class="p">,</span> <span class="s2">"The player insulted Elara and called her useless."</span><span class="p">,</span> <span class="s2">"useless"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"praise_skilled"</span><span class="p">,</span> <span class="s2">"The player praised Elara as a skilled blacksmith."</span><span class="p">,</span> <span class="s2">"skilled"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"lost_ring"</span><span class="p">,</span> <span class="s2">"The player lost a copper ring at the old bridge."</span><span class="p">,</span> <span class="s2">"ring"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"shield_repair"</span><span class="p">,</span> <span class="s2">"The player needs a shield repaired before sunset."</span><span class="p">,</span> <span class="s2">"shield"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"spider_fear"</span><span class="p">,</span> <span class="s2">"The player is afraid of giant cave spiders."</span><span class="p">,</span> <span class="s2">"spiders"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"old_map"</span><span class="p">,</span> <span class="s2">"The player found an old map under the chapel floor."</span><span class="p">,</span> <span class="s2">"map"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"baker_favor"</span><span class="p">,</span> <span class="s2">"The player promised to help the baker carry flour."</span><span class="p">,</span> <span class="s2">"baker"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"silver_dagger"</span><span class="p">,</span> <span class="s2">"The player wants a silver dagger for night patrol."</span><span class="p">,</span> <span class="s2">"dagger"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"quiet_roads"</span><span class="p">,</span> <span class="s2">"The player prefers quiet roads over crowded markets."</span><span class="p">,</span> <span class="s2">"roads"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"north_gate"</span><span class="p">,</span> <span class="s2">"The player plans to leave through the north gate."</span><span class="p">,</span> <span class="s2">"north"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"broken_hinge"</span><span class="p">,</span> <span class="s2">"The player needs a broken stable hinge forged."</span><span class="p">,</span> <span class="s2">"hinge"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"lost_horse"</span><span class="p">,</span> <span class="s2">"The player lost a brown horse near the river."</span><span class="p">,</span> <span class="s2">"horse"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"blue_cloak"</span><span class="p">,</span> <span class="s2">"The player wears a blue cloak with torn sleeves."</span><span class="p">,</span> <span class="s2">"cloak"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"old_key"</span><span class="p">,</span> <span class="s2">"The player found an old iron key in the chapel."</span><span class="p">,</span> <span class="s2">"key"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"torch_advice"</span><span class="p">,</span> <span class="s2">"Elara advised the player to bring a torch into the forest."</span><span class="p">,</span> <span class="s2">"torch"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"wolf_fear"</span><span class="p">,</span> <span class="s2">"The player is afraid of wolves near the ridge."</span><span class="p">,</span> <span class="s2">"wolves"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"merchant_debt"</span><span class="p">,</span> <span class="s2">"The player owes a merchant three silver coins."</span><span class="p">,</span> <span class="s2">"merchant"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"broken_axe"</span><span class="p">,</span> <span class="s2">"The player's axe head cracked during training."</span><span class="p">,</span> <span class="s2">"axe"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"sister_goal"</span><span class="p">,</span> <span class="s2">"The player is searching for their missing sister."</span><span class="p">,</span> <span class="s2">"sister"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"forest_path"</span><span class="p">,</span> <span class="s2">"The player knows a hidden path behind the forest shrine."</span><span class="p">,</span> <span class="s2">"path"</span><span class="p">),</span>
-<span class="p">]</span>
-
-<span class="n">RETRIEVAL_QUERIES</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s2">"What is my name?"</span><span class="p">,</span> <span class="s2">"Matt"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Which weapon did I misplace near the trees?"</span><span class="p">,</span> <span class="s2">"sword"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Who did I help with a broken wheel?"</span><span class="p">,</span> <span class="s2">"miller"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"What kind of weapon do I prefer?"</span><span class="p">,</span> <span class="s2">"axes"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Who am I searching for in my family?"</span><span class="p">,</span> <span class="s2">"brother"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Did I offend Elara before?"</span><span class="p">,</span> <span class="s2">"useless"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Did I compliment the blacksmith?"</span><span class="p">,</span> <span class="s2">"skilled"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"What did I lose at the bridge?"</span><span class="p">,</span> <span class="s2">"ring"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"What equipment needs repair before sunset?"</span><span class="p">,</span> <span class="s2">"shield"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"What creature scares me in caves?"</span><span class="p">,</span> <span class="s2">"spiders"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"What did I discover below the chapel?"</span><span class="p">,</span> <span class="s2">"map"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Who did I promise to help with flour?"</span><span class="p">,</span> <span class="s2">"baker"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"What blade do I want for patrol?"</span><span class="p">,</span> <span class="s2">"dagger"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"What type of roads do I prefer?"</span><span class="p">,</span> <span class="s2">"roads"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Which gate do I plan to use?"</span><span class="p">,</span> <span class="s2">"north"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"What stable part needs forging?"</span><span class="p">,</span> <span class="s2">"hinge"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"What animal did I lose by the river?"</span><span class="p">,</span> <span class="s2">"horse"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"What color is my torn cloak?"</span><span class="p">,</span> <span class="s2">"cloak"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"What did I find in the chapel?"</span><span class="p">,</span> <span class="s2">"key"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"What did Elara tell me to bring into the woods?"</span><span class="p">,</span> <span class="s2">"torch"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"What animals near the ridge frighten me?"</span><span class="p">,</span> <span class="s2">"wolves"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Who do I owe silver coins to?"</span><span class="p">,</span> <span class="s2">"merchant"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"What tool cracked during training?"</span><span class="p">,</span> <span class="s2">"axe"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"Which sibling am I looking for besides my brother?"</span><span class="p">,</span> <span class="s2">"sister"</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"What route do I know behind the shrine?"</span><span class="p">,</span> <span class="s2">"path"</span><span class="p">),</span>
-<span class="p">]</span>
-
-
-<span class="n">TRUST_CASES</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s2">"greeting"</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">51</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"share_fact"</span><span class="p">,</span> <span class="mi">51</span><span class="p">,</span> <span class="mi">52</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"compliment"</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">57</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"insult"</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">47</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"ask_help"</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">47</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"ask_quest"</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">47</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"ask_memory"</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">47</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"goodbye"</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">47</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"unknown"</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">47</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"compliment"</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">52</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"compliment"</span><span class="p">,</span> <span class="mi">52</span><span class="p">,</span> <span class="mi">57</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"insult"</span><span class="p">,</span> <span class="mi">57</span><span class="p">,</span> <span class="mi">47</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"insult"</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">37</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"share_fact"</span><span class="p">,</span> <span class="mi">37</span><span class="p">,</span> <span class="mi">38</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"greeting"</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">39</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"ask_help"</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">39</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"compliment"</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">44</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"unknown"</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">44</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"goodbye"</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">44</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"insult"</span><span class="p">,</span> <span class="mi">44</span><span class="p">,</span> <span class="mi">34</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"compliment"</span><span class="p">,</span> <span class="mi">34</span><span class="p">,</span> <span class="mi">39</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"share_fact"</span><span class="p">,</span> <span class="mi">39</span><span class="p">,</span> <span class="mi">40</span><span class="p">),</span>
-<span class="p">]</span>
-
-<span class="n">ADVICE_CASES</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="p">(</span><span class="s2">"I will follow your advice and bring a torch"</span><span class="p">,</span> <span class="s2">"followed_advice"</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I will bring a torch"</span><span class="p">,</span> <span class="s2">"followed_advice"</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I will bring light"</span><span class="p">,</span> <span class="s2">"followed_advice"</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I will not go alone"</span><span class="p">,</span> <span class="s2">"followed_advice"</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I will be careful"</span><span class="p">,</span> <span class="s2">"followed_advice"</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I will ask around"</span><span class="p">,</span> <span class="s2">"followed_advice"</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I will prepare first"</span><span class="p">,</span> <span class="s2">"followed_advice"</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I will repair it first"</span><span class="p">,</span> <span class="s2">"followed_advice"</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I will take your advice"</span><span class="p">,</span> <span class="s2">"followed_advice"</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I will do that"</span><span class="p">,</span> <span class="s2">"followed_advice"</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I will go alone anyway"</span><span class="p">,</span> <span class="s2">"ignored_advice"</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I will ignore that"</span><span class="p">,</span> <span class="s2">"ignored_advice"</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I will do the opposite"</span><span class="p">,</span> <span class="s2">"ignored_advice"</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I will be reckless"</span><span class="p">,</span> <span class="s2">"ignored_advice"</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I will go without help"</span><span class="p">,</span> <span class="s2">"ignored_advice"</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I will go without a torch"</span><span class="p">,</span> <span class="s2">"ignored_advice"</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I will go without light"</span><span class="p">,</span> <span class="s2">"ignored_advice"</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I do not care"</span><span class="p">,</span> <span class="s2">"ignored_advice"</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"No need for caution"</span><span class="p">,</span> <span class="s2">"ignored_advice"</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I am not going to prepare"</span><span class="p">,</span> <span class="s2">"ignored_advice"</span><span class="p">,</span> <span class="o">-</span><span class="mi">8</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"I found a coin"</span><span class="p">,</span> <span class="s2">"unrelated"</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-    <span class="p">(</span><span class="s2">"The road is quiet"</span><span class="p">,</span> <span class="s2">"unrelated"</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
-<span class="p">]</span>
-
-<span class="n">FULL_PIPELINE_SCRIPT</span> <span class="o">=</span> <span class="p">[</span>
-    <span class="s2">"Hello Elara"</span><span class="p">,</span>
-    <span class="s2">"My name is Matt"</span><span class="p">,</span>
-    <span class="s2">"I lost my sword near the forest"</span><span class="p">,</span>
-    <span class="s2">"Do you remember what I lost?"</span><span class="p">,</span>
-    <span class="s2">"You are a very skilled blacksmith"</span><span class="p">,</span>
-    <span class="s2">"Can you help me recover my sword?"</span><span class="p">,</span>
-    <span class="s2">"I will go alone anyway"</span><span class="p">,</span>
-    <span class="s2">"Can you help me recover my sword?"</span><span class="p">,</span>
-    <span class="s2">"I will follow your advice and bring a torch"</span><span class="p">,</span>
-    <span class="s2">"I want to find my brother"</span><span class="p">,</span>
-    <span class="s2">"Do you remember who I am looking for?"</span><span class="p">,</span>
-    <span class="s2">"You are useless"</span><span class="p">,</span>
-    <span class="s2">"I lost a copper ring at the old bridge"</span><span class="p">,</span>
-    <span class="s2">"What did I lose at the bridge?"</span><span class="p">,</span>
-    <span class="s2">"I need my shield repaired before sunset"</span><span class="p">,</span>
-    <span class="s2">"Can you help me fix my shield?"</span><span class="p">,</span>
-    <span class="s2">"I will prepare first"</span><span class="p">,</span>
-    <span class="s2">"The sky is cloudy"</span><span class="p">,</span>
-    <span class="s2">"Do you remember the name of my horse?"</span><span class="p">,</span>
-    <span class="s2">"Goodbye"</span><span class="p">,</span>
-<span class="p">]</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">pct</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="k">return</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">.0%</span><span class="si">}</span><span class="s2">"</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_intent</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="n">agent</span> <span class="o">=</span> <span class="n">MemoryNPC</span><span class="p">()</span>
-    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">text</span><span class="p">,</span> <span class="n">expected</span> <span class="ow">in</span> <span class="n">INTENT_CASES</span><span class="p">:</span>
-        <span class="n">predicted</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">classify_intent</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-            <span class="p">{</span>
-                <span class="s2">"input"</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
-                <span class="s2">"expected"</span><span class="p">:</span> <span class="n">expected</span><span class="p">,</span>
-                <span class="s2">"predicted"</span><span class="p">:</span> <span class="n">predicted</span><span class="p">,</span>
-                <span class="s2">"correct"</span><span class="p">:</span> <span class="n">predicted</span> <span class="o">==</span> <span class="n">expected</span><span class="p">,</span>
-            <span class="p">}</span>
-        <span class="p">)</span>
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_memory_extraction</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="n">agent</span> <span class="o">=</span> <span class="n">MemoryNPC</span><span class="p">()</span>
-    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">text</span><span class="p">,</span> <span class="n">should_save</span> <span class="ow">in</span> <span class="n">MEMORY_EXTRACTION_CASES</span><span class="p">:</span>
-        <span class="n">memory</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">extract_memory</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-        <span class="n">saved</span> <span class="o">=</span> <span class="n">memory</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">"NONE"</span>
-        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-            <span class="p">{</span>
-                <span class="s2">"input"</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
-                <span class="s2">"expected_saved"</span><span class="p">:</span> <span class="n">should_save</span><span class="p">,</span>
-                <span class="s2">"extracted_memory"</span><span class="p">:</span> <span class="n">memory</span><span class="p">,</span>
-                <span class="s2">"actual_saved"</span><span class="p">:</span> <span class="n">saved</span><span class="p">,</span>
-                <span class="s2">"correct"</span><span class="p">:</span> <span class="n">saved</span> <span class="o">==</span> <span class="n">should_save</span><span class="p">,</span>
-            <span class="p">}</span>
-        <span class="p">)</span>
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">seed_retrieval_agent</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">MemoryNPC</span><span class="p">:</span>
-    <span class="n">agent</span> <span class="o">=</span> <span class="n">MemoryNPC</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">memory_text</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">RETRIEVAL_MEMORIES</span><span class="p">:</span>
-        <span class="n">agent</span><span class="o">.</span><span class="n">add_memory</span><span class="p">(</span><span class="n">memory_text</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">agent</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_retrieval</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="n">agent</span> <span class="o">=</span> <span class="n">seed_retrieval_agent</span><span class="p">()</span>
-    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">query</span><span class="p">,</span> <span class="n">expected_keyword</span> <span class="ow">in</span> <span class="n">RETRIEVAL_QUERIES</span><span class="p">:</span>
-        <span class="n">top_memories</span> <span class="o">=</span> <span class="p">[</span><span class="n">memory</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span> <span class="k">for</span> <span class="n">memory</span> <span class="ow">in</span> <span class="n">agent</span><span class="o">.</span><span class="n">retrieve_memories</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)]</span>
-        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-            <span class="p">{</span>
-                <span class="s2">"query"</span><span class="p">:</span> <span class="n">query</span><span class="p">,</span>
-                <span class="s2">"expected_keyword"</span><span class="p">:</span> <span class="n">expected_keyword</span><span class="p">,</span>
-                <span class="s2">"top_3_memories"</span><span class="p">:</span> <span class="n">top_memories</span><span class="p">,</span>
-                <span class="s2">"success"</span><span class="p">:</span> <span class="n">retrieval_success</span><span class="p">(</span><span class="n">top_memories</span><span class="p">,</span> <span class="n">expected_keyword</span><span class="p">),</span>
-            <span class="p">}</span>
-        <span class="p">)</span>
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_keyword_baseline</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="n">memory_texts</span> <span class="o">=</span> <span class="p">[</span><span class="n">memory_text</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">memory_text</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">RETRIEVAL_MEMORIES</span><span class="p">]</span>
-    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">query</span><span class="p">,</span> <span class="n">expected_keyword</span> <span class="ow">in</span> <span class="n">RETRIEVAL_QUERIES</span><span class="p">:</span>
-        <span class="n">top_memories</span> <span class="o">=</span> <span class="n">keyword_retrieve</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">memory_texts</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-            <span class="p">{</span>
-                <span class="s2">"query"</span><span class="p">:</span> <span class="n">query</span><span class="p">,</span>
-                <span class="s2">"expected_keyword"</span><span class="p">:</span> <span class="n">expected_keyword</span><span class="p">,</span>
-                <span class="s2">"keyword_top_3"</span><span class="p">:</span> <span class="n">top_memories</span><span class="p">,</span>
-                <span class="s2">"success"</span><span class="p">:</span> <span class="n">retrieval_success</span><span class="p">(</span><span class="n">top_memories</span><span class="p">,</span> <span class="n">expected_keyword</span><span class="p">),</span>
-            <span class="p">}</span>
-        <span class="p">)</span>
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_trust_rules</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="n">agent</span> <span class="o">=</span> <span class="n">MemoryNPC</span><span class="p">()</span>
-    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">intent</span><span class="p">,</span> <span class="n">expected_before</span><span class="p">,</span> <span class="n">expected_after</span> <span class="ow">in</span> <span class="n">TRUST_CASES</span><span class="p">:</span>
-        <span class="n">before</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">trust_score</span>
-        <span class="n">after</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">update_trust</span><span class="p">(</span><span class="n">intent</span><span class="p">)</span>
-        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-            <span class="p">{</span>
-                <span class="s2">"intent"</span><span class="p">:</span> <span class="n">intent</span><span class="p">,</span>
-                <span class="s2">"expected_before"</span><span class="p">:</span> <span class="n">expected_before</span><span class="p">,</span>
-                <span class="s2">"actual_before"</span><span class="p">:</span> <span class="n">before</span><span class="p">,</span>
-                <span class="s2">"expected_after"</span><span class="p">:</span> <span class="n">expected_after</span><span class="p">,</span>
-                <span class="s2">"actual_after"</span><span class="p">:</span> <span class="n">after</span><span class="p">,</span>
-                <span class="s2">"correct"</span><span class="p">:</span> <span class="n">before</span> <span class="o">==</span> <span class="n">expected_before</span> <span class="ow">and</span> <span class="n">after</span> <span class="o">==</span> <span class="n">expected_after</span><span class="p">,</span>
-            <span class="p">}</span>
-        <span class="p">)</span>
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_advice_behavior</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">text</span><span class="p">,</span> <span class="n">expected_status</span><span class="p">,</span> <span class="n">expected_delta</span> <span class="ow">in</span> <span class="n">ADVICE_CASES</span><span class="p">:</span>
-        <span class="n">agent</span> <span class="o">=</span> <span class="n">MemoryNPC</span><span class="p">()</span>
-        <span class="n">agent</span><span class="o">.</span><span class="n">pending_advice</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">"topic"</span><span class="p">:</span> <span class="s2">"lost_item_recovery"</span><span class="p">,</span>
-            <span class="s2">"summary"</span><span class="p">:</span> <span class="s2">"Recover the lost item carefully; bring light, ask around, and do not go alone."</span><span class="p">,</span>
-        <span class="p">}</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">_evaluate_advice_following</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
-        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-            <span class="p">{</span>
-                <span class="s2">"input"</span><span class="p">:</span> <span class="n">text</span><span class="p">,</span>
-                <span class="s2">"expected_status"</span><span class="p">:</span> <span class="n">expected_status</span><span class="p">,</span>
-                <span class="s2">"actual_status"</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="s2">"advice_status"</span><span class="p">],</span>
-                <span class="s2">"expected_delta"</span><span class="p">:</span> <span class="n">expected_delta</span><span class="p">,</span>
-                <span class="s2">"actual_delta"</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="s2">"advice_delta"</span><span class="p">],</span>
-                <span class="s2">"correct"</span><span class="p">:</span> <span class="n">result</span><span class="p">[</span><span class="s2">"advice_status"</span><span class="p">]</span> <span class="o">==</span> <span class="n">expected_status</span> <span class="ow">and</span> <span class="n">result</span><span class="p">[</span><span class="s2">"advice_delta"</span><span class="p">]</span> <span class="o">==</span> <span class="n">expected_delta</span><span class="p">,</span>
-            <span class="p">}</span>
-        <span class="p">)</span>
-    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_persistence</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="n">memory_id</span><span class="p">,</span> <span class="n">memory_text</span><span class="p">,</span> <span class="n">expected_keyword</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">RETRIEVAL_MEMORIES</span><span class="p">[:</span><span class="mi">20</span><span class="p">],</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-        <span class="n">agent</span> <span class="o">=</span> <span class="n">MemoryNPC</span><span class="p">()</span>
-        <span class="n">agent</span><span class="o">.</span><span class="n">trust_score</span> <span class="o">=</span> <span class="mi">40</span> <span class="o">+</span> <span class="n">index</span>
-        <span class="n">agent</span><span class="o">.</span><span class="n">turn_number</span> <span class="o">=</span> <span class="n">index</span>
-        <span class="n">agent</span><span class="o">.</span><span class="n">add_memory</span><span class="p">(</span><span class="n">memory_text</span><span class="p">)</span>
-        <span class="n">agent</span><span class="o">.</span><span class="n">conversation_history</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"speaker"</span><span class="p">:</span> <span class="s2">"Player"</span><span class="p">,</span> <span class="s2">"text"</span><span class="p">:</span> <span class="sa">f</span><span class="s2">"seed </span><span class="si">{</span><span class="n">index</span><span class="si">}</span><span class="s2">"</span><span class="p">})</span>
-        <span class="n">state_json</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">export_state_json</span><span class="p">()</span>
-
-        <span class="n">restored</span> <span class="o">=</span> <span class="n">MemoryNPC</span><span class="p">()</span>
-        <span class="n">restored</span><span class="o">.</span><span class="n">import_state_json</span><span class="p">(</span><span class="n">state_json</span><span class="p">)</span>
-        <span class="n">retrieved</span> <span class="o">=</span> <span class="p">[</span><span class="n">memory</span><span class="p">[</span><span class="s2">"text"</span><span class="p">]</span> <span class="k">for</span> <span class="n">memory</span> <span class="ow">in</span> <span class="n">restored</span><span class="o">.</span><span class="n">retrieve_memories</span><span class="p">(</span><span class="n">memory_text</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)]</span>
-        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
-            <span class="p">{</span>
-                <span class="s2">"case"</span><span class="p">:</span> <span class="n">index</span><span class="p">,</span>
-                <span class="s2">"memory_id"</span><span class="p">:</span> <span class="n">memory_id</span><span class="p">,</span>
-                <span class="s2">"expected_keyword"</span><span class="p">:</span> <span class="n">expected_keyword</span><span class="p">,</span>
-                <span class="s2">"trust_preserved"</span><span class="p">:</span> <span class="n">restored</span><span class="o">.</span><span class="n">trust_score</span> <span class="o">==</span> <span class="n">agent</span><span class="o">.</span><span class="n">trust_score</span><span class="p">,</span>
-                <span class="s2">"turn_preserved"</span><span class="p">:</span> <span class="n">restored</span><span class="o">.</span><span class="n">turn_number</span> <span class="o">==</span> <span class="n">agent</span><span class="o">.</span><span class="n">turn_number</span><span class="p">,</span>
-                <span class="s2">"memory_count_preserved"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">restored</span><span class="o">.</span><span class="n">memories</span><span class="p">)</span> <span class="o">==</span> <span class="nb">len</span><span class="p">(</span><span class="n">agent</span><span class="o">.</span><span class="n">memories</span><span class="p">),</span>
-                <span class="s2">"retrieval_after_load"</span><span class="p">:</span> <span class="n">retrieved</span><span class="p">,</span>
-                <span class="s2">"retrieval_success"</span><span class="p">:</span> <span class="n">retrieval_success</span><span class="p">(</span><span class="n">retrieved</span><span class="p">,</span> <span class="n">expected_keyword</span><span class="p">),</span>
-            <span class="p">}</span>
-        <span class="p">)</span>
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
-    <span class="n">df</span><span class="p">[</span><span class="s2">"correct"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="n">df</span><span class="p">[</span><span class="s2">"trust_preserved"</span><span class="p">]</span>
-        <span class="o">&amp;</span> <span class="n">df</span><span class="p">[</span><span class="s2">"turn_preserved"</span><span class="p">]</span>
-        <span class="o">&amp;</span> <span class="n">df</span><span class="p">[</span><span class="s2">"memory_count_preserved"</span><span class="p">]</span>
-        <span class="o">&amp;</span> <span class="n">df</span><span class="p">[</span><span class="s2">"retrieval_success"</span><span class="p">]</span>
-    <span class="p">)</span>
-    <span class="k">return</span> <span class="n">df</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">evaluate_full_pipeline_trace</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-    <span class="n">agent</span> <span class="o">=</span> <span class="n">MemoryNPC</span><span class="p">()</span>
-    <span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">FULL_PIPELINE_SCRIPT</span><span class="p">:</span>
-        <span class="n">event</span> <span class="o">=</span> <span class="n">agent</span><span class="o">.</span><span class="n">generate_npc_response</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
-        <span class="n">checks</span> <span class="o">=</span> <span class="n">automatic_response_checks</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-        <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="o">**</span><span class="n">event</span><span class="p">,</span> <span class="o">**</span><span class="n">checks</span><span class="p">})</span>
-    <span class="n">trace_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">{</span><span class="s2">"agent"</span><span class="p">:</span> <span class="n">agent</span><span class="p">,</span> <span class="s2">"trace"</span><span class="p">:</span> <span class="n">trace_df</span><span class="p">}</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">dataframe_rate</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"correct"</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="k">else</span> <span class="mf">0.0</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">run_validation</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-    <span class="n">intent_df</span> <span class="o">=</span> <span class="n">evaluate_intent</span><span class="p">()</span>
-    <span class="n">memory_df</span> <span class="o">=</span> <span class="n">evaluate_memory_extraction</span><span class="p">()</span>
-    <span class="n">retrieval_df</span> <span class="o">=</span> <span class="n">evaluate_retrieval</span><span class="p">()</span>
-    <span class="n">keyword_df</span> <span class="o">=</span> <span class="n">evaluate_keyword_baseline</span><span class="p">()</span>
-    <span class="n">trust_df</span> <span class="o">=</span> <span class="n">evaluate_trust_rules</span><span class="p">()</span>
-    <span class="n">advice_df</span> <span class="o">=</span> <span class="n">evaluate_advice_behavior</span><span class="p">()</span>
-    <span class="n">persistence_df</span> <span class="o">=</span> <span class="n">evaluate_persistence</span><span class="p">()</span>
-    <span class="n">full_pipeline</span> <span class="o">=</span> <span class="n">evaluate_full_pipeline_trace</span><span class="p">()</span>
-    <span class="n">trace_df</span> <span class="o">=</span> <span class="n">full_pipeline</span><span class="p">[</span><span class="s2">"trace"</span><span class="p">]</span>
-
-    <span class="n">metric_tables</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">"intent"</span><span class="p">:</span> <span class="n">intent_df</span><span class="p">,</span>
-        <span class="s2">"memory_extraction"</span><span class="p">:</span> <span class="n">memory_df</span><span class="p">,</span>
-        <span class="s2">"faiss_retrieval"</span><span class="p">:</span> <span class="n">retrieval_df</span><span class="p">,</span>
-        <span class="s2">"keyword_baseline"</span><span class="p">:</span> <span class="n">keyword_df</span><span class="p">,</span>
-        <span class="s2">"trust_rules"</span><span class="p">:</span> <span class="n">trust_df</span><span class="p">,</span>
-        <span class="s2">"advice_behavior"</span><span class="p">:</span> <span class="n">advice_df</span><span class="p">,</span>
-        <span class="s2">"persistence"</span><span class="p">:</span> <span class="n">persistence_df</span><span class="p">,</span>
-        <span class="s2">"full_pipeline_trace"</span><span class="p">:</span> <span class="n">trace_df</span><span class="p">,</span>
-    <span class="p">}</span>
-
-    <span class="n">summary_rows</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="p">{</span>
-            <span class="s2">"metric"</span><span class="p">:</span> <span class="s2">"Intent classification"</span><span class="p">,</span>
-            <span class="s2">"cases"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">intent_df</span><span class="p">),</span>
-            <span class="s2">"success_rate"</span><span class="p">:</span> <span class="n">dataframe_rate</span><span class="p">(</span><span class="n">intent_df</span><span class="p">),</span>
-            <span class="s2">"target"</span><span class="p">:</span> <span class="s2">"&gt;= 80%"</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">"metric"</span><span class="p">:</span> <span class="s2">"Memory extraction selectivity"</span><span class="p">,</span>
-            <span class="s2">"cases"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">memory_df</span><span class="p">),</span>
-            <span class="s2">"success_rate"</span><span class="p">:</span> <span class="n">dataframe_rate</span><span class="p">(</span><span class="n">memory_df</span><span class="p">),</span>
-            <span class="s2">"target"</span><span class="p">:</span> <span class="s2">"&gt;= 80%"</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">"metric"</span><span class="p">:</span> <span class="s2">"FAISS semantic retrieval"</span><span class="p">,</span>
-            <span class="s2">"cases"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">retrieval_df</span><span class="p">),</span>
-            <span class="s2">"success_rate"</span><span class="p">:</span> <span class="n">dataframe_rate</span><span class="p">(</span><span class="n">retrieval_df</span><span class="p">,</span> <span class="s2">"success"</span><span class="p">),</span>
-            <span class="s2">"target"</span><span class="p">:</span> <span class="s2">"&gt;= 80%"</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">"metric"</span><span class="p">:</span> <span class="s2">"Keyword retrieval baseline"</span><span class="p">,</span>
-            <span class="s2">"cases"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">keyword_df</span><span class="p">),</span>
-            <span class="s2">"success_rate"</span><span class="p">:</span> <span class="n">dataframe_rate</span><span class="p">(</span><span class="n">keyword_df</span><span class="p">,</span> <span class="s2">"success"</span><span class="p">),</span>
-            <span class="s2">"target"</span><span class="p">:</span> <span class="s2">"comparison baseline"</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">"metric"</span><span class="p">:</span> <span class="s2">"Trust rule validation"</span><span class="p">,</span>
-            <span class="s2">"cases"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">trust_df</span><span class="p">),</span>
-            <span class="s2">"success_rate"</span><span class="p">:</span> <span class="n">dataframe_rate</span><span class="p">(</span><span class="n">trust_df</span><span class="p">),</span>
-            <span class="s2">"target"</span><span class="p">:</span> <span class="s2">"100</span><span class="si">% d</span><span class="s2">eterministic"</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">"metric"</span><span class="p">:</span> <span class="s2">"Advice behavior validation"</span><span class="p">,</span>
-            <span class="s2">"cases"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">advice_df</span><span class="p">),</span>
-            <span class="s2">"success_rate"</span><span class="p">:</span> <span class="n">dataframe_rate</span><span class="p">(</span><span class="n">advice_df</span><span class="p">),</span>
-            <span class="s2">"target"</span><span class="p">:</span> <span class="s2">"100</span><span class="si">% d</span><span class="s2">eterministic"</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">"metric"</span><span class="p">:</span> <span class="s2">"Persistence roundtrip"</span><span class="p">,</span>
-            <span class="s2">"cases"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">persistence_df</span><span class="p">),</span>
-            <span class="s2">"success_rate"</span><span class="p">:</span> <span class="n">dataframe_rate</span><span class="p">(</span><span class="n">persistence_df</span><span class="p">),</span>
-            <span class="s2">"target"</span><span class="p">:</span> <span class="s2">"100</span><span class="si">% d</span><span class="s2">eterministic"</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">"metric"</span><span class="p">:</span> <span class="s2">"Full-pipeline trace completeness"</span><span class="p">,</span>
-            <span class="s2">"cases"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">trace_df</span><span class="p">),</span>
-            <span class="s2">"success_rate"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">trace_df</span><span class="p">[</span><span class="s2">"trace_complete"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
-            <span class="s2">"target"</span><span class="p">:</span> <span class="s2">"100%"</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">"metric"</span><span class="p">:</span> <span class="s2">"Full-pipeline trust arithmetic"</span><span class="p">,</span>
-            <span class="s2">"cases"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">trace_df</span><span class="p">),</span>
-            <span class="s2">"success_rate"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">trace_df</span><span class="p">[</span><span class="s2">"trust_delta_matches"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
-            <span class="s2">"target"</span><span class="p">:</span> <span class="s2">"100%"</span><span class="p">,</span>
-        <span class="p">},</span>
-        <span class="p">{</span>
-            <span class="s2">"metric"</span><span class="p">:</span> <span class="s2">"Full-pipeline automatic response checks"</span><span class="p">,</span>
-            <span class="s2">"cases"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">trace_df</span><span class="p">),</span>
-            <span class="s2">"success_rate"</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="n">trace_df</span><span class="p">[</span><span class="s2">"all_automatic_checks_pass"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()),</span>
-            <span class="s2">"target"</span><span class="p">:</span> <span class="s2">"&gt;= 80%"</span><span class="p">,</span>
-        <span class="p">},</span>
-    <span class="p">]</span>
-    <span class="n">summary_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">summary_rows</span><span class="p">)</span>
-    <span class="n">summary_df</span><span class="p">[</span><span class="s2">"success_rate_percent"</span><span class="p">]</span> <span class="o">=</span> <span class="n">summary_df</span><span class="p">[</span><span class="s2">"success_rate"</span><span class="p">]</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">pct</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">metric_tables</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">RESULT_DIR</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-    <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">"summary"</span><span class="p">:</span> <span class="n">summary_df</span><span class="p">,</span>
-        <span class="s2">"tables"</span><span class="p">:</span> <span class="n">metric_tables</span><span class="p">,</span>
-        <span class="s2">"result_dir"</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">RESULT_DIR</span><span class="p">),</span>
-    <span class="p">}</span>
-
-    <span class="n">json_payload</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">"summary"</span><span class="p">:</span> <span class="n">summary_df</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">"records"</span><span class="p">),</span>
-        <span class="s2">"tables"</span><span class="p">:</span> <span class="p">{</span>
-            <span class="n">name</span><span class="p">:</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">orient</span><span class="o">=</span><span class="s2">"records"</span><span class="p">))</span>
-            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">df</span> <span class="ow">in</span> <span class="n">metric_tables</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
-        <span class="p">},</span>
-    <span class="p">}</span>
-    <span class="p">(</span><span class="n">RESULT_DIR</span> <span class="o">/</span> <span class="s2">"validation_results.json"</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span>
-        <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">json_payload</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">),</span>
-        <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">,</span>
-    <span class="p">)</span>
-    <span class="n">summary_df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">RESULT_DIR</span> <span class="o">/</span> <span class="s2">"summary.csv"</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">result</span>
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
-    <span class="n">validation</span> <span class="o">=</span> <span class="n">run_validation</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">validation</span><span class="p">[</span><span class="s2">"summary"</span><span class="p">]</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Wrote results to </span><span class="si">{</span><span class="n">validation</span><span class="p">[</span><span class="s1">'result_dir'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-</pre></div>
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">¶</a></h2><p>The validation gives evidence that the system is doing more than normal chatbot roleplay. It tests the intermediate NLP steps: intent classification, memory extraction, vector retrieval, deterministic trust updates, advice behavior, persistence, and trace completeness.</p>
 </div>
 </div>
 </div>

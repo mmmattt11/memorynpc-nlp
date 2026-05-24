@@ -7702,7 +7702,7 @@ flowchart TD
 </tr>
 </tbody>
 </table>
-<p>The evidence is not only the high score. It also matters that I compare FAISS against a baseline, run each major metric at least 20 times, and expose intermediate decisions through the validation trace. The validation results are stored in <code>validation.ipynb</code>, <code>validation.html</code>, and <code>results/validation/</code>.</p>
+<p>The evidence is not only the high score. It also matters that I compare FAISS against a baseline, run each major metric at least 20 times, and expose intermediate decisions through the validation trace. The validation results are summarized in <code>validation.ipynb</code> and <code>validation.html</code>.</p>
 </div>
 </div>
 </div>
@@ -7722,7 +7722,7 @@ flowchart TD
 <li>trust changes are deterministic and logged;</li>
 <li>every turn stores input, intent, memory extraction, retrieved memories, trust before/after, advice status, and response;</li>
 <li>memory state can be exported and loaded again;</li>
-<li>validation helpers check trace completeness and simple grounding behavior.</li>
+<li>automatic validation checks trace completeness and simple grounding behavior.</li>
 </ul>
 <p>This does not remove all LLM risk, but it makes failures easier for me and a reader to detect and explain.</p>
 </div>
@@ -7805,59 +7805,6 @@ cp<span class="w"> </span>.env.example<span class="w"> </span>.env
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h2 id="11.-Conclusion">11. Conclusion<a class="anchor-link" href="#11.-Conclusion">¶</a></h2><p>MemoryNPC satisfies the assignment because I created a novel language agent that an LLM cannot do out of the box: an NPC with inspectable long-term memory, semantic retrieval, deterministic relationship state, persistence, and validation traces.</p>
 <p>It meets the target on manually designed validation cases and clearly motivates why each NLP component exists.</p>
-</div>
-</div>
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell" id="cell-id=6731f452">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In [1]:</div>
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-<div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Lightweight local smoke checks that do not call the LLM API.</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">evaluation_helpers</span><span class="w"> </span><span class="kn">import</span> <span class="n">keyword_retrieve</span><span class="p">,</span> <span class="n">automatic_response_checks</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">keyword_retrieve</span><span class="p">(</span>
-    <span class="s1">'What weapon did I lose near the trees?'</span><span class="p">,</span>
-    <span class="p">[</span><span class="s1">'The player lost a sword near the forest.'</span><span class="p">,</span> <span class="s1">'The player likes quiet roads.'</span><span class="p">],</span>
-<span class="p">))</span>
-
-<span class="n">event</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s1">'turn'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s1">'player_input'</span><span class="p">:</span> <span class="s1">'Do you remember my sword?'</span><span class="p">,</span>
-    <span class="s1">'intent'</span><span class="p">:</span> <span class="s1">'ask_memory'</span><span class="p">,</span>
-    <span class="s1">'extracted_memory'</span><span class="p">:</span> <span class="s1">'NONE'</span><span class="p">,</span>
-    <span class="s1">'saved_memory'</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="s1">'retrieved_memories'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'The player lost a sword near the forest.'</span><span class="p">],</span>
-    <span class="s1">'trust_before'</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
-    <span class="s1">'trust_score'</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
-    <span class="s1">'trust_level'</span><span class="p">:</span> <span class="s1">'neutral'</span><span class="p">,</span>
-    <span class="s1">'trust_delta'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s1">'advice_status'</span><span class="p">:</span> <span class="s1">'none'</span><span class="p">,</span>
-    <span class="s1">'advice_delta'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="s1">'active_advice'</span><span class="p">:</span> <span class="s1">'None'</span><span class="p">,</span>
-    <span class="s1">'new_advice'</span><span class="p">:</span> <span class="s1">'None'</span><span class="p">,</span>
-    <span class="s1">'npc_response'</span><span class="p">:</span> <span class="s1">'You lost a sword near the forest.'</span><span class="p">,</span>
-<span class="p">}</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">automatic_response_checks</span><span class="p">(</span><span class="n">event</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>['The player lost a sword near the forest.', 'The player likes quiet roads.']
-{'trace_complete': True, 'trust_delta_matches': True, 'grounding_check_applicable': True, 'memory_answer_grounded': True, 'all_automatic_checks_pass': True}
-</pre>
-</div>
 </div>
 </div>
 </div>
@@ -8907,131 +8854,6 @@ cp<span class="w"> </span>.env.example<span class="w"> </span>.env
 </div>
 </div>
 </div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ed02198c">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Appendix:-evaluation_helpers.py">Appendix: <code>evaluation_helpers.py</code><a class="anchor-link" href="#Appendix:-evaluation_helpers.py">¶</a></h2><div class="highlight"><pre><span></span><span class="sd">"""Reusable validation helpers for the MemoryNPC notebooks.</span>
-
-<span class="sd">The notebooks contain the executed assignment results. This module makes the</span>
-<span class="sd">evaluation logic reusable so the validation is not only hand-written in notebook</span>
-<span class="sd">cells. It covers retrieval baselines, trace completeness, and lightweight</span>
-<span class="sd">response-grounding checks.</span>
-<span class="sd">"""</span>
-
-<span class="kn">import</span><span class="w"> </span><span class="nn">re</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Sequence</span>
-
-
-<span class="n">REQUIRED_TRACE_COLUMNS</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"turn"</span><span class="p">,</span>
-    <span class="s2">"player_input"</span><span class="p">,</span>
-    <span class="s2">"intent"</span><span class="p">,</span>
-    <span class="s2">"extracted_memory"</span><span class="p">,</span>
-    <span class="s2">"saved_memory"</span><span class="p">,</span>
-    <span class="s2">"retrieved_memories"</span><span class="p">,</span>
-    <span class="s2">"trust_before"</span><span class="p">,</span>
-    <span class="s2">"trust_score"</span><span class="p">,</span>
-    <span class="s2">"trust_level"</span><span class="p">,</span>
-    <span class="s2">"trust_delta"</span><span class="p">,</span>
-    <span class="s2">"advice_status"</span><span class="p">,</span>
-    <span class="s2">"advice_delta"</span><span class="p">,</span>
-    <span class="s2">"active_advice"</span><span class="p">,</span>
-    <span class="s2">"new_advice"</span><span class="p">,</span>
-    <span class="s2">"npc_response"</span><span class="p">,</span>
-<span class="p">}</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Tokenize text for a deliberately simple keyword baseline."""</span>
-    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">findall</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[a-zA-Z]+"</span><span class="p">,</span> <span class="n">text</span><span class="o">.</span><span class="n">lower</span><span class="p">()))</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">keyword_retrieve</span><span class="p">(</span><span class="n">query</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">memories</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Retrieve memories by word overlap for a transparent baseline."""</span>
-    <span class="n">query_tokens</span> <span class="o">=</span> <span class="n">tokenize</span><span class="p">(</span><span class="n">query</span><span class="p">)</span>
-    <span class="n">scored</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">memory</span> <span class="ow">in</span> <span class="n">memories</span><span class="p">:</span>
-        <span class="n">overlap</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">query_tokens</span> <span class="o">&amp;</span> <span class="n">tokenize</span><span class="p">(</span><span class="n">memory</span><span class="p">))</span>
-        <span class="k">if</span> <span class="n">overlap</span><span class="p">:</span>
-            <span class="n">scored</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">overlap</span><span class="p">,</span> <span class="n">memory</span><span class="p">))</span>
-    <span class="n">scored</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">item</span><span class="p">:</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">[</span><span class="n">memory</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">memory</span> <span class="ow">in</span> <span class="n">scored</span><span class="p">[:</span><span class="n">k</span><span class="p">]]</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">retrieval_success</span><span class="p">(</span><span class="n">top_memories</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">expected_keyword</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">"""Return whether an expected keyword appears in retrieved memories."""</span>
-    <span class="n">expected</span> <span class="o">=</span> <span class="n">expected_keyword</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-    <span class="k">return</span> <span class="nb">any</span><span class="p">(</span><span class="n">expected</span> <span class="ow">in</span> <span class="n">memory</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">memory</span> <span class="ow">in</span> <span class="n">top_memories</span><span class="p">)</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">missing_trace_columns</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">set</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Find missing validation fields in one event-log row."""</span>
-    <span class="k">return</span> <span class="n">REQUIRED_TRACE_COLUMNS</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">automatic_response_checks</span><span class="p">(</span><span class="n">event</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Run lightweight response-quality checks on a generated turn.</span>
-
-<span class="sd">    These checks do not replace human judgement, but they make response quality</span>
-<span class="sd">    less subjective by testing trace completeness, trust arithmetic, and whether</span>
-<span class="sd">    memory answers are grounded in retrieved evidence.</span>
-<span class="sd">    """</span>
-    <span class="n">retrieved</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"retrieved_memories"</span><span class="p">)</span> <span class="ow">or</span> <span class="p">[]</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"npc_response"</span><span class="p">,</span> <span class="s2">""</span><span class="p">))</span>
-    <span class="n">response_lower</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-    <span class="n">intent</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"intent"</span><span class="p">)</span>
-
-    <span class="n">checks</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s2">"trace_complete"</span><span class="p">:</span> <span class="ow">not</span> <span class="n">missing_trace_columns</span><span class="p">(</span><span class="n">event</span><span class="p">),</span>
-        <span class="s2">"trust_delta_matches"</span><span class="p">:</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"trust_score"</span><span class="p">)</span> <span class="o">-</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"trust_before"</span><span class="p">)</span> <span class="o">==</span> <span class="n">event</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"trust_delta"</span><span class="p">),</span>
-        <span class="s2">"grounding_check_applicable"</span><span class="p">:</span> <span class="n">intent</span> <span class="o">==</span> <span class="s2">"ask_memory"</span><span class="p">,</span>
-        <span class="s2">"memory_answer_grounded"</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="p">}</span>
-
-    <span class="k">if</span> <span class="n">intent</span> <span class="o">==</span> <span class="s2">"ask_memory"</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">retrieved</span><span class="p">:</span>
-            <span class="n">retrieved_tokens</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">memory</span> <span class="ow">in</span> <span class="n">retrieved</span><span class="p">:</span>
-                <span class="n">retrieved_tokens</span> <span class="o">|=</span> <span class="p">{</span><span class="n">token</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">tokenize</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">memory</span><span class="p">))</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">token</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">}</span>
-            <span class="n">response_tokens</span> <span class="o">=</span> <span class="n">tokenize</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
-            <span class="n">checks</span><span class="p">[</span><span class="s2">"memory_answer_grounded"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">retrieved_tokens</span> <span class="o">&amp;</span> <span class="n">response_tokens</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">uncertainty_markers</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="s2">"do not recall"</span><span class="p">,</span>
-                <span class="s2">"don't recall"</span><span class="p">,</span>
-                <span class="s2">"do not remember"</span><span class="p">,</span>
-                <span class="s2">"don't remember"</span><span class="p">,</span>
-                <span class="s2">"no relevant memory"</span><span class="p">,</span>
-                <span class="s2">"nothing in memory"</span><span class="p">,</span>
-            <span class="p">]</span>
-            <span class="n">checks</span><span class="p">[</span><span class="s2">"memory_answer_grounded"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span><span class="n">marker</span> <span class="ow">in</span> <span class="n">response_lower</span> <span class="k">for</span> <span class="n">marker</span> <span class="ow">in</span> <span class="n">uncertainty_markers</span><span class="p">)</span>
-
-    <span class="n">checks</span><span class="p">[</span><span class="s2">"all_automatic_checks_pass"</span><span class="p">]</span> <span class="o">=</span> <span class="nb">all</span><span class="p">(</span>
-        <span class="n">value</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">checks</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="o">!=</span> <span class="s2">"grounding_check_applicable"</span>
-    <span class="p">)</span>
-    <span class="k">return</span> <span class="n">checks</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">summarize_response_checks</span><span class="p">(</span><span class="n">events</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">"""Summarize automatic response checks over a validation trace."""</span>
-    <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="n">automatic_response_checks</span><span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="k">for</span> <span class="n">event</span> <span class="ow">in</span> <span class="n">events</span><span class="p">]</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">rows</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">{</span><span class="s2">"event_count"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">"pass_rate"</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
-    <span class="n">passed</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">"all_automatic_checks_pass"</span><span class="p">]</span> <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">rows</span><span class="p">)</span>
-    <span class="k">return</span> <span class="p">{</span>
-        <span class="s2">"event_count"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">),</span>
-        <span class="s2">"passed"</span><span class="p">:</span> <span class="n">passed</span><span class="p">,</span>
-        <span class="s2">"failed"</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span> <span class="o">-</span> <span class="n">passed</span><span class="p">,</span>
-        <span class="s2">"pass_rate"</span><span class="p">:</span> <span class="n">passed</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">rows</span><span class="p">),</span>
-    <span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</div>
-</div>
 <div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=ec19d2f2">
 <div class="jp-Cell-inputWrapper" tabindex="0">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
@@ -9156,14 +8978,9 @@ The notebook also includes a keyword retrieval baseline. This checks whether a s
 <span class="k">-</span><span class="w"> </span><span class="sb">`memorynpc.html`</span>: exported HTML version of the main notebook.
 <span class="k">-</span><span class="w"> </span><span class="sb">`validation.ipynb`</span>: executed validation notebook with at least 20 cases per major metric.
 <span class="k">-</span><span class="w"> </span><span class="sb">`validation.html`</span>: exported HTML version of the validation notebook.
-<span class="k">-</span><span class="w"> </span><span class="sb">`run_validation.py`</span>: reproducible validation script that writes CSV/JSON result files.
 <span class="k">-</span><span class="w"> </span><span class="sb">`npc_agent.py`</span>: shared backend containing the <span class="sb">`MemoryNPC`</span> class.
 <span class="k">-</span><span class="w"> </span><span class="sb">`baseline_agent.py`</span>: role-only LLM baseline used to explain what the system adds beyond a normal chatbot.
-<span class="k">-</span><span class="w"> </span><span class="sb">`evaluation_helpers.py`</span>: reusable baseline and automatic validation helpers.
 <span class="k">-</span><span class="w"> </span><span class="sb">`app.py`</span>: Streamlit chat demo and validation trace viewer.
-<span class="k">-</span><span class="w"> </span><span class="sb">`VALIDATION_RESULTS.md`</span>: concise summary of the executed notebook results and long-conversation validation outcomes.
-<span class="k">-</span><span class="w"> </span><span class="sb">`EVALUATION_PROTOCOL.md`</span>: explanation of validation strength, baselines, model choice, persistence, and how to interpret the high scores.
-<span class="k">-</span><span class="w"> </span><span class="sb">`DEMO_VIDEO_SCRIPT.md`</span>: short recording plan for the optional demo video.
 <span class="k">-</span><span class="w"> </span><span class="sb">`requirements.txt`</span>: Python dependencies.
 <span class="k">-</span><span class="w"> </span><span class="sb">`.env.example`</span>: example environment variable file.
 <span class="k">-</span><span class="w"> </span><span class="sb">`README.md`</span>: setup and project explanation.
@@ -9188,7 +9005,7 @@ pip install -r requirements.txt
 <p>Do not commit or share your real API key. The repository includes <code>.env.example</code>, not the real <code>.env</code>.</p>
 <p>I use OpenAI models by default because they are easy to run through LangChain for this assignment. The architecture is not limited to OpenAI: the same design can use local Ollama chat models, Hugging Face or sentence-transformers embeddings, or other LangChain-compatible model providers if the chat and embedding wrappers are swapped.</p>
 <h2 id="Run-The-Notebook">Run The Notebook<a class="anchor-link" href="#Run-The-Notebook">¶</a></h2><p>Open <code>memorynpc.ipynb</code> first. It contains the complete project explanation and code appendices.</p>
-<p>Open <code>validation.ipynb</code> for the detailed validation report. It tests every major metric at least 20 times and stores the detailed results in <code>results/validation/</code>.</p>
+<p>Open <code>validation.ipynb</code> for the detailed validation report. It tests every major metric at least 20 times where possible.</p>
 <p>The exported HTML versions are <code>memorynpc.html</code> and <code>validation.html</code>.</p>
 <h2 id="Run-The-Streamlit-App">Run The Streamlit App<a class="anchor-link" href="#Run-The-Streamlit-App">¶</a></h2><div class="highlight"><pre><span></span>streamlit<span class="w"> </span>run<span class="w"> </span>app.py
 </pre></div>
@@ -9216,182 +9033,6 @@ I will follow your advice and bring a torch
 <li>The system is designed for English dialogue only.</li>
 </ul>
 <pre><code></code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=fc20ef22">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Appendix:-EVALUATION_PROTOCOL.md">Appendix: <code>EVALUATION_PROTOCOL.md</code><a class="anchor-link" href="#Appendix:-EVALUATION_PROTOCOL.md">¶</a></h2><div class="highlight"><pre><span></span><span class="gh"># Evaluation Protocol And Academic Framing</span>
-
-This file addresses the main evaluation risks for my university NLP assignment. I use it to make clear how the results should be interpreted.
-
-<span class="gu">## 1. Validation Set Size</span>
-
-The reported 100% scores are not my claim of general language understanding. They are controlled results on manually designed assignment test cases.
-
-The validation is still useful because the cases cover the parts of the pipeline that matter for this design:
-
-<span class="k">-</span><span class="w"> </span>greetings, goodbyes, help requests, quest requests, memory questions, compliments, insults, durable facts, and unknown filler for intent detection;
-<span class="k">-</span><span class="w"> </span>name, lost item, helped person, weapon preference, search goal, insult, compliment, lost object, repair need, and fear memories for retrieval;
-<span class="k">-</span><span class="w"> </span>cooperative, defiant, and mixed longer conversations for trace and trust behavior.
-
-For a larger project, the next step would be to collect player-written utterances from multiple people and split them into development and held-out test sets.
-
-<span class="gu">## 2. Baselines</span>
-
-I now use two baseline levels:
-
-<span class="k">1.</span> A role-only LLM baseline, implemented in <span class="sb">`baseline_agent.py`</span>. This tests the assignment claim that a normal LLM prompt can roleplay Elara but does not provide external memory, trust state, retrieval metadata, or validation traces.
-<span class="k">2.</span> A keyword retrieval baseline, implemented in the notebooks and reusable in <span class="sb">`evaluation_helpers.py`</span>. This gives a measurable retrieval comparison against FAISS semantic search.
-
-The keyword baseline is the quantitative baseline because it can be scored deterministically on the same memory retrieval cases. The role-only LLM baseline is mainly architectural: it demonstrates which capabilities disappear when the system is reduced to a single chat prompt.
-
-<span class="gu">## 3. Response Quality</span>
-
-Open-ended dialogue cannot be fully evaluated with one automatic metric. A response may be fluent but still ungrounded, or grounded but stylistically weak.
-
-The project therefore combines:
-
-<span class="k">-</span><span class="w"> </span>manual checklist review for character consistency, helpfulness, and tone;
-<span class="k">-</span><span class="w"> </span>automatic checks in <span class="sb">`evaluation_helpers.py`</span> for trace completeness, trust arithmetic, and memory grounding;
-<span class="k">-</span><span class="w"> </span>unsupported-memory prompts that check whether Elara avoids claiming memories that were not retrieved.
-
-This is more informative than only reading the final chat output because it evaluates both final responses and the intermediate NLP pipeline decisions.
-
-<span class="gu">## 4. Model Choice</span>
-
-I use OpenAI models by default because they are easy to access through LangChain and stable for a short assignment demo. This is an engineering choice, not a conceptual dependency.
-
-The architecture can use other models if equivalent LangChain chat and embedding wrappers are supplied, for example:
-
-<span class="k">-</span><span class="w"> </span>a local Ollama chat model for response generation;
-<span class="k">-</span><span class="w"> </span>a Hugging Face or sentence-transformers embedding model for vector retrieval;
-<span class="k">-</span><span class="w"> </span>another hosted LLM provider supported by LangChain.
-
-The <span class="sb">`.env.example`</span> file documents <span class="sb">`OPENAI_MODEL`</span> and <span class="sb">`OPENAI_EMBEDDING_MODEL`</span> so the OpenAI model names can be changed without editing code.
-
-<span class="gu">## 5. Memory Persistence</span>
-
-Memory is no longer only runtime state. I added JSON export/import so <span class="sb">`MemoryNPC`</span> can save and load:
-
-<span class="k">-</span><span class="w"> </span>trust score;
-<span class="k">-</span><span class="w"> </span>turn number;
-<span class="k">-</span><span class="w"> </span>durable memories;
-<span class="k">-</span><span class="w"> </span>conversation history;
-<span class="k">-</span><span class="w"> </span>validation event log;
-<span class="k">-</span><span class="w"> </span>pending advice state.
-
-The Streamlit app exposes this as "Download memory state" and "Load memory state". When a state file is loaded, the backend rebuilds the FAISS index from stored memories.
-
-This is still a simple persistence layer rather than a production database, but it is enough to demonstrate how the system could carry NPC memory across sessions.
-
-<span class="gu">## 6. Interpreting Perfect Scores</span>
-
-Several current validation results are 100%. These are acceptable only because the report presents them as controlled assignment checks. I avoid saying the system is "solved" or "perfect."
-
-The correct interpretation of my results is:
-
-<span class="k">&gt; </span><span class="ge">On manually designed validation cases, the pipeline met the target performance and behaved consistently enough to support the design claim.</span>
-
-Larger, user-generated, held-out validation would be needed before making broader claims.
-</pre></div>
-</div>
-</div>
-</div>
-</div>
-<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell" id="cell-id=87ce930b">
-<div class="jp-Cell-inputWrapper" tabindex="0">
-<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
-</div>
-<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h2 id="Appendix:-VALIDATION_RESULTS.md">Appendix: <code>VALIDATION_RESULTS.md</code><a class="anchor-link" href="#Appendix:-VALIDATION_RESULTS.md">¶</a></h2><div class="highlight"><pre><span></span><span class="gh"># MemoryNPC Validation Results</span>
-
-Validation was executed from the project notebooks on May 24, 2026 using the real <span class="sb">`MemoryNPC`</span> backend.
-
-The scores below are controlled results on manually designed validation cases. They are evidence that the system meets the assignment target, not a claim that the agent will be perfect on arbitrary player language.
-
-<span class="gu">## Executed Notebooks</span>
-
-<span class="k">-</span><span class="w"> </span><span class="sb">`memorynpc.ipynb`</span>: main report notebook.
-<span class="k">-</span><span class="w"> </span><span class="sb">`validation.ipynb`</span>: technical validation notebook with at least 20 cases per major metric.
-
-<span class="gu">## Main Metrics</span>
-
-| Metric | Result |
-|---|---:|
-| Main notebook intent accuracy | 100% |
-| Main notebook FAISS memory retrieval success | 100% |
-| Main notebook keyword retrieval baseline | 70% |
-| Validation notebook intent accuracy | 100% |
-| Validation notebook FAISS retrieval success | 100% |
-| Validation notebook keyword baseline | 50% |
-| Long conversation scenario pass rate | 100% |
-
-<span class="gu">## Extended 20x Validation</span>
-
-I added a separate validation suite after reviewing the project from an NLP evaluation perspective. The suite tests every major metric at least 20 times and stores the result files in <span class="sb">`results/validation/`</span>.
-
-| Metric | Cases | Result |
-|---|---:|---:|
-| Intent classification | 30 | 100% |
-| Memory extraction selectivity | 22 | 100% |
-| FAISS semantic retrieval | 25 | 100% |
-| Keyword retrieval baseline | 25 | 88% |
-| Trust rule validation | 22 | 100% |
-| Advice behavior validation | 22 | 100% |
-| Persistence roundtrip | 20 | 100% |
-| Full-pipeline trace completeness | 20 | 100% |
-| Full-pipeline trust arithmetic | 20 | 100% |
-| Full-pipeline automatic response checks | 20 | 100% |
-
-The first extended run found a direct memory-extraction weakness: <span class="sb">`extract_memory()`</span> returned <span class="sb">`NONE`</span> for some durable relationship and goal utterances. I fixed this by adding the narrow rule-based fallback inside <span class="sb">`extract_memory()`</span> when the LLM extractor returns <span class="sb">`NONE`</span>. The final extended run above reflects the corrected backend.
-
-<span class="gu">## Long Conversation Evaluation</span>
-
-The validation notebook runs three longer scripted conversations:
-
-| Scenario | Turns | Stored memories | Final trust | Advice followed | Advice ignored | Passed |
-|---|---:|---:|---:|---:|---:|---|
-| cooperative_memory_player | 12 | 6 | 65 | 2 | 0 | yes |
-| defiant_low_trust_player | 11 | 3 | 0 | 0 | 3 | yes |
-| mixed_memory_stress_player | 14 | 5 | 66 | 2 | 0 | yes |
-
-Each scenario checks whether:
-
-<span class="k">-</span><span class="w"> </span>all turns are logged in the validation trace;
-<span class="k">-</span><span class="w"> </span>at least three durable memories are stored;
-<span class="k">-</span><span class="w"> </span>expected memory retrieval checks pass;
-<span class="k">-</span><span class="w"> </span>advice following or advice ignoring changes trust as expected;
-<span class="k">-</span><span class="w"> </span>final trust moves in the expected direction.
-
-<span class="gu">## Baseline</span>
-
-The project now distinguishes two baselines:
-
-<span class="k">-</span><span class="w"> </span><span class="sb">`baseline_agent.py`</span>: a role-only LLM baseline. This can roleplay Elara, but it has no external memory, trust state, persistence, or validation trace.
-<span class="k">-</span><span class="w"> </span>Keyword retrieval baseline: a simple word-overlap retriever. This is the quantitative baseline compared against FAISS.
-
-The keyword baseline is intentionally weaker than FAISS because it does not understand semantic similarity. The validation results support the design choice to use embeddings and FAISS:
-
-<span class="k">-</span><span class="w"> </span>Validation notebook FAISS retrieval: 100%
-<span class="k">-</span><span class="w"> </span>Validation notebook keyword baseline: 50%
-<span class="k">-</span><span class="w"> </span>Main notebook FAISS retrieval: 100%
-<span class="k">-</span><span class="w"> </span>Main notebook keyword baseline: 70%
-
-<span class="gu">## Validation-Driven Fixes</span>
-
-Running the notebooks revealed an intent-classification edge case: substring matching treated words like <span class="sb">`shield`</span> as if they contained the greeting <span class="sb">`hi`</span>. The intent fallback was updated to use whole-word matching. Obvious filler statements about weather, clouds, sky, and the moon are now kept as <span class="sb">`unknown`</span> instead of being over-interpreted by the LLM fallback.
-
-<span class="gu">## Conclusion</span>
-
-The final validation supports the assignment claim that MemoryNPC is more than a normal chatbot. The system exposes and tests intermediate NLP behavior: intent classification, memory extraction, semantic retrieval, trust tracking, advice-following state, response generation, persistence, and trace completeness.
-</pre></div>
 </div>
 </div>
 </div>

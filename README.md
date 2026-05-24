@@ -92,14 +92,9 @@ The notebook also includes a keyword retrieval baseline. This checks whether a s
 - `memorynpc.html`: exported HTML version of the main notebook.
 - `validation.ipynb`: executed validation notebook with at least 20 cases per major metric.
 - `validation.html`: exported HTML version of the validation notebook.
-- `run_validation.py`: reproducible validation script that writes CSV/JSON result files.
 - `npc_agent.py`: shared backend containing the `MemoryNPC` class.
 - `baseline_agent.py`: role-only LLM baseline used to explain what the system adds beyond a normal chatbot.
-- `evaluation_helpers.py`: reusable baseline and automatic validation helpers.
 - `app.py`: Streamlit chat demo and validation trace viewer.
-- `VALIDATION_RESULTS.md`: concise summary of the executed notebook results and long-conversation validation outcomes.
-- `EVALUATION_PROTOCOL.md`: explanation of validation strength, baselines, model choice, persistence, and how to interpret the high scores.
-- `DEMO_VIDEO_SCRIPT.md`: short recording plan for the optional demo video.
 - `requirements.txt`: Python dependencies.
 - `.env.example`: example environment variable file.
 - `README.md`: setup and project explanation.
@@ -138,7 +133,7 @@ I use OpenAI models by default because they are easy to run through LangChain fo
 
 Open `memorynpc.ipynb` first. It contains the complete project explanation and code appendices.
 
-Open `validation.ipynb` for the detailed validation report. It tests every major metric at least 20 times and stores the detailed results in `results/validation/`.
+Open `validation.ipynb` for the detailed validation report. It tests every major metric at least 20 times where possible.
 
 The exported HTML versions are `memorynpc.html` and `validation.html`.
 
